@@ -3,10 +3,10 @@ package engine.ai;
 public class SniperAI extends SoldierAI {
 	
 	public double getGunAngle() {
-		return 1;
+		return System.currentTimeMillis()/1000.0;
 	}
 	
 	public boolean fireIfPossible() {
-		return false;
+		return true;
 	}
 }

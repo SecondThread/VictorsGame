@@ -7,6 +7,7 @@ import java.awt.Shape;
 import java.util.ArrayList;
 
 import engine.ai.SoldierAI;
+import engine.game.Window;
 
 public class Soldier {
 	
@@ -33,10 +34,10 @@ public class Soldier {
 		this.ai=ai;
 	}
 	
-	public void update(ArrayList<Soldier> otherSoldiers) {
+	public void update(ArrayList<Soldier> otherSoldiers, ArrayList<Bullet> bullets) {
 		updateShapeToReturn();
 		ai.update();
-		subUpdate(otherSoldiers);
+		subUpdate(otherSoldiers, bullets);
 		double direction=ai.getDirectionToMove();
 		double speed=ai.getMoveSpeed()*acceleration;
 		
@@ -51,9 +52,13 @@ public class Soldier {
 		
 		checkForCollisions(otherSoldiers);
 		
+		if (x<0||y<0||x>=Window.WIDTH||y>=Window.HEIGHT) {
+			dead=true;
+		}
+		
 	}
 	
-	protected void subUpdate(ArrayList<Soldier> others) {
+	protected void subUpdate(ArrayList<Soldier> others, ArrayList<Bullet> bullets) {
 		
 	}
 	

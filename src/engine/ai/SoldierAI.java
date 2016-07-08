@@ -5,7 +5,7 @@ import java.util.Random;
 public class SoldierAI {
 	
 	public double direction=new Random().nextDouble()*6.28;
-	public double moveSpeed=1;//new Random().nextDouble();
+	public double moveSpeed=0;//new Random().nextDouble();
 	
 	public void update() {
 	}

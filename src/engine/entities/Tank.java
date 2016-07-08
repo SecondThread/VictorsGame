@@ -21,7 +21,7 @@ public class Tank extends Soldier {
 		this.ai=ai;
 	}
 	
-	protected void subUpdate(ArrayList<Soldier> others) {
+	protected void subUpdate(ArrayList<Soldier> others, ArrayList<Bullet> bullets) {
 		tryToRotateShield();
 		updateShield();//yuck...
 		translateShield(1);
@@ -79,6 +79,10 @@ public class Tank extends Soldier {
 		}
 		g.setColor(Color.blue);
 		g.fill(shield);
+	}
+	
+	public Polygon getShield() {
+		return shield;
 	}
 	
 }
