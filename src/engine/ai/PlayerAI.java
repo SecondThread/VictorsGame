@@ -3,6 +3,7 @@ package engine.ai;
 import java.awt.Color;
 
 import engine.entities.Runner;
+import engine.entities.Sniper;
 import engine.entities.Soldier;
 import engine.entities.Tank;
 import engine.game.Window;
@@ -26,7 +27,7 @@ public class PlayerAI {
 				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(), 1);
 			}
 			else {
-				toReturn[i]=new Runner(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new SoldierAI());
+				toReturn[i]=new Sniper(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new SniperAI());
 			}
 		}
 		return toReturn;

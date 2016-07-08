@@ -24,14 +24,7 @@ public class Tank extends Soldier {
 	protected void subUpdate(ArrayList<Soldier> others) {
 		tryToRotateShield();
 		updateShield();//yuck...
-		topLeft.x+=getPosition().x;
-		topLeft.y+=getPosition().y;
-		topRight.x+=getPosition().x;
-		topRight.y+=getPosition().y;
-		bottomLeft.x+=getPosition().x;
-		bottomLeft.y+=getPosition().y;
-		bottomRight.x+=getPosition().x;
-		bottomRight.y+=getPosition().y;
+		translateShield(1);
 		Point sideRight=topRight.midpoint(bottomRight);
 		Point upperSideRight=sideRight.midpoint(topRight);
 		Point lowerSideRight=sideRight.midpoint(bottomRight);
@@ -43,14 +36,18 @@ public class Tank extends Soldier {
 				s.OnCollision(true);
 			}
 		}
-		topLeft.x-=getPosition().x;
-		topLeft.y-=getPosition().y;
-		topRight.x-=getPosition().x;
-		topRight.y-=getPosition().y;
-		bottomLeft.x-=getPosition().x;
-		bottomLeft.y-=getPosition().y;
-		bottomRight.x-=getPosition().x;
-		bottomRight.y-=getPosition().y;
+		translateShield(-1);
+	}
+	
+	private void translateShield(double multiplier) {
+		topLeft.x+=getPosition().x*multiplier;
+		topLeft.y+=getPosition().y*multiplier;
+		topRight.x+=getPosition().x*multiplier;
+		topRight.y+=getPosition().y*multiplier;
+		bottomLeft.x+=getPosition().x*multiplier;
+		bottomLeft.y+=getPosition().y*multiplier;
+		bottomRight.x+=getPosition().x*multiplier;
+		bottomRight.y+=getPosition().y*multiplier;
 	}
 
 	private void tryToRotateShield() {
@@ -83,4 +80,5 @@ public class Tank extends Soldier {
 		g.setColor(Color.blue);
 		g.fill(shield);
 	}
+	
 }
