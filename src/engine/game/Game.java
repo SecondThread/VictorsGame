@@ -35,6 +35,9 @@ public class Game {
 	}
 	
 	public void update() {
+		left.update(soldiersAlive, bullets);
+		right.update(soldiersAlive, bullets);
+		
 		for (Soldier s:soldiersAlive) {
 			s.update(soldiersAlive, bullets);
 		}

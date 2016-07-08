@@ -79,4 +79,9 @@ public class Bullet {
 		return dead;
 	}
 	
+	public double getVelocityMagnitude() {
+		return velocity;
+	}
+	
+	
 }

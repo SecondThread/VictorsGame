@@ -36,7 +36,7 @@ public class Soldier {
 	
 	public void update(ArrayList<Soldier> otherSoldiers, ArrayList<Bullet> bullets) {
 		updateShapeToReturn();
-		ai.update();
+		ai.update(otherSoldiers, bullets);
 		subUpdate(otherSoldiers, bullets);
 		double direction=ai.getDirectionToMove();
 		double speed=ai.getMoveSpeed()*acceleration;
@@ -98,6 +98,10 @@ public class Soldier {
 	
 	public Point getPosition() {
 		return new Point(x, y);
+	}
+	
+	public Point getVelocity() {
+		return new Point(xVelocity, yVelocity);
 	}
 	
 	private void checkForCollisions(ArrayList<Soldier> others) {

@@ -1,8 +1,9 @@
 package engine.ai;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
-import engine.entities.Runner;
+import engine.entities.Bullet;
 import engine.entities.Sniper;
 import engine.entities.Soldier;
 import engine.entities.Tank;
@@ -33,7 +34,7 @@ public class PlayerAI {
 		return toReturn;
 	}
 	
-	public void update() {
+	public void update(ArrayList<Soldier> players, ArrayList<Bullet> bullets) {
 		
 	}
 }

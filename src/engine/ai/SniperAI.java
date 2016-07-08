@@ -9,4 +9,5 @@ public class SniperAI extends SoldierAI {
 	public boolean fireIfPossible() {
 		return true;
 	}
+	
 }

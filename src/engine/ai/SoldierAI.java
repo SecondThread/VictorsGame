@@ -1,13 +1,17 @@
 package engine.ai;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import engine.entities.Bullet;
+import engine.entities.Soldier;
 
 public class SoldierAI {
 	
 	public double direction=new Random().nextDouble()*6.28;
 	public double moveSpeed=0;//new Random().nextDouble();
 	
-	public void update() {
+	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 	}
 	
 	public double getDirectionToMove() {

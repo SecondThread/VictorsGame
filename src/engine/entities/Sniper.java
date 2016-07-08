@@ -66,5 +66,8 @@ public class Sniper extends Soldier {
 		bullets.add(toCreate);
 	}
 	
+	public int getFramesUntilCanShoot() {
+		return shootCounter; 
+	}
 	
 }
