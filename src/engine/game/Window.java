@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class Window {
 	private static JFrame frame;
 	private static JPanel outerPanel;
-	public static final int WIDTH=1600, HEIGHT=900;
+	public static final int WIDTH=800, HEIGHT=450;
 	
 	private static int scaleFactor=1;
 	

@@ -18,13 +18,13 @@ public class PlayerAI {
 	 * @return
 	 */
 	public Soldier[] getStartFormation(boolean onLeft, Color color) {
-		Soldier[] toReturn=new Soldier[9];
+		Soldier[] toReturn=new Soldier[1];
 		int x=50;
 		if (onLeft) {
 			x=Window.WIDTH-x;
 		}
 		for (int i=0; i<toReturn.length; i++) {
-			if (i%2==0) {				
+			if (!(i%2==0)) {				
 				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(), 1);
 			}
 			else {
