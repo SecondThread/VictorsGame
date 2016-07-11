@@ -24,7 +24,7 @@ public class PlayerAI {
 			x=Window.WIDTH-x;
 		}
 		for (int i=0; i<toReturn.length; i++) {
-			if (!(i%2==0)) {				
+			if (i%2==0) {				
 				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(), 1);
 			}
 			else {
@@ -35,6 +35,10 @@ public class PlayerAI {
 	}
 	
 	public void update(ArrayList<Soldier> players, ArrayList<Bullet> bullets) {
-		
+		for(Soldier x : players){
+			if(x instanceof Sniper){
+				
+			}
+		}
 	}
 }

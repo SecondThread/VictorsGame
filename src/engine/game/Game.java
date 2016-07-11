@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import dan.ai.PlayerDI;
 import engine.ai.PlayerAI;
 import engine.background.Background;
 import engine.background.TwoPlayerBackground;
@@ -17,7 +18,7 @@ public class Game {
 	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
 	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
-	PlayerAI left=new PlayerAI();
+	PlayerAI left=new PlayerDI();
 	PlayerAI right=new PlayerAI();
 	
 	public static Game getTwoPlayerGame() {
