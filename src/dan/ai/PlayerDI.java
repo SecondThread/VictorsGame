@@ -3,11 +3,8 @@ package dan.ai;
 import java.awt.Color;
 
 import engine.ai.PlayerAI;
-import engine.ai.SniperAI;
-import engine.ai.TankAI;
 import engine.entities.Sniper;
 import engine.entities.Soldier;
-import engine.entities.Tank;
 import engine.game.Window;
 
 public class PlayerDI extends PlayerAI {
@@ -18,7 +15,9 @@ public class PlayerDI extends PlayerAI {
 			x = Window.WIDTH - x;
 		}
 		for (int i = 0; i < toReturn.length; i++) {
-			toReturn[i] = new Sniper(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, new SniperDI());
+			SniperDI temp = new SniperDI();
+			toReturn[i] = new Sniper(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, temp);
+			temp.setObject(toReturn[i]);
 		}
 		return toReturn;
 	}
