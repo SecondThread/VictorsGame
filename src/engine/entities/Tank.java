@@ -49,12 +49,14 @@ public class Tank extends Soldier {
 		bottomRight.x+=getPosition().x*multiplier;
 		bottomRight.y+=getPosition().y*multiplier;
 	}
-
+	//added else if for no shield movement
 	private void tryToRotateShield() {
 		if (ai.getShieldTurnDirection()>0) {
 			shieldAngle+=Math.PI/250;
 		}
-		else {
+		else if(ai.getShieldTurnDirection() == 0){
+		}
+		else{
 			shieldAngle-=Math.PI/250;
 		}
 	}
