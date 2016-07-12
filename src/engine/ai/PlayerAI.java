@@ -20,7 +20,7 @@ public class PlayerAI {
 	public Soldier[] getStartFormation(boolean onLeft, Color color) {
 		Soldier[] toReturn=new Soldier[9];
 		int x=50;
-		if (onLeft) {
+		if (!onLeft) {
 			x=Window.WIDTH-x;
 		}
 		for (int i=0; i<toReturn.length; i++) {
