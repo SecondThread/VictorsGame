@@ -8,7 +8,7 @@ public class Runner extends Soldier {
 
 	public Runner(double x, double y, Color color, SoldierAI ai) {
 		super(x, y, color, ai);
-		friction=.97;
+		friction=.8;
 		acceleration=0.19;
 		isRunner=true;
 	}

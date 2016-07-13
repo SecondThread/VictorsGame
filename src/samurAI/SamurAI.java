@@ -10,8 +10,7 @@ import engine.game.Window;
 public class SamurAI extends PlayerAI {
 	public Soldier[] getStartFormation(boolean onLeft, Color color) {
 		Soldier[] toReturn=new Soldier[1];
-		toReturn[0]=new Runner(onLeft?50:Window.WIDTH-50, Window.HEIGHT/2, color, new MoveableSprinter());
-		return toReturn;
-		
+		toReturn[0]=new Runner(onLeft?50:Window.WIDTH-50, Window.HEIGHT/2, color, new MoveableRunner());
+		return toReturn;	
 	}
 }
