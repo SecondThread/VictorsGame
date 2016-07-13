@@ -150,4 +150,8 @@ public class Soldier {
 		return shapeToReturn;
 	}
 	
+	public SoldierAI getAI() {
+		return ai;
+	}
+	
 }
