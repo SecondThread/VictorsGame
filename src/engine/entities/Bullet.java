@@ -9,7 +9,7 @@ import engine.game.Window;
 public class Bullet {
 	private double x, y;
 	private double angle;
-	private double velocity=15;
+	public static double velocity=20;
 	
 	private boolean dead=false; 
 	
@@ -28,7 +28,7 @@ public class Bullet {
 	}
 	
 	public void update(ArrayList<Soldier> soldiers) {
-		for (int i=0; i<15; i++) {
+		for (int i=0; i<velocity; i++) {
 			move();
 			tryToHitShield(soldiers);
 			if (!dead) checkForCollisions(soldiers);
@@ -41,8 +41,8 @@ public class Bullet {
 	private void move() {
 		double xVelocity=Math.cos(angle)*velocity;
 		double yVelocity=Math.sin(angle)*velocity;
-		x+=xVelocity/15;
-		y+=yVelocity/15;
+		x+=xVelocity/velocity;
+		y+=yVelocity/velocity;
 	}
 	
 	public void render(Graphics2D g) {

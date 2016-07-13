@@ -55,7 +55,6 @@ public class Soldier {
 		if (x<0||y<0||x>=Window.WIDTH||y>=Window.HEIGHT) {
 			dead=true;
 		}
-		System.out.println(xVelocity+" "+yVelocity);
 		
 	}
 	

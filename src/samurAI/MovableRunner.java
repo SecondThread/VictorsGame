@@ -7,12 +7,14 @@ import engine.entities.Bullet;
 import engine.entities.Soldier;
 import samurAI.input.Keyboard;
 
-public class MoveableRunner extends SoldierAI {
+public class MovableRunner extends SoldierAI {
 	private Keyboard keyboard=new Keyboard();
 	private double xVelocity=0, yVelocity=0;
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 		
+		xVelocity=0;
+		yVelocity=0;
 		keyboard.update();
 		//keyboard.setDisplayKeycodeMessages(true);
 		if (keyboard.getKeyDown(68)) {//left
@@ -29,6 +31,11 @@ public class MoveableRunner extends SoldierAI {
 		}
 		
 		direction=Math.atan2(yVelocity, xVelocity);
-		moveSpeed=Math.max(Math.abs(xVelocity), Math.abs(yVelocity))<0.1?0:1;
+		if (Math.abs(xVelocity)<0.1&&Math.abs(yVelocity)<0.1) {
+			moveSpeed=0;
+		}
+		else {			
+			moveSpeed=1;
+		}
 	}
 }
