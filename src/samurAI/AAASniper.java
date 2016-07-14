@@ -56,7 +56,9 @@ public class AAASniper extends SniperAI {
 		Point myLocation=mySoldier.getPosition();
 		Point otherLocation=soldierToTarget.getPosition();
 		double distance=myLocation.distance(otherLocation);
-		double bulletTravelTime=distance/Bullet.velocity;
+		double bulletTravelTime=distance/Bullet.velocity; //speed=distance/time, so time=distance/speed
+		otherLocation.x+=soldierToTarget.getVelocity().x*bulletTravelTime*.75;
+		otherLocation.y+=soldierToTarget.getVelocity().y*bulletTravelTime*.75;
 		gunAngle=Math.atan2(otherLocation.y-myLocation.y, otherLocation.x-myLocation.x);
 	}
 
@@ -74,8 +76,8 @@ public class AAASniper extends SniperAI {
 	
 	private void tryToDodge() {
 		dodgeCounter-=1;
-		if (dodgeCounter<=-100) {
-			dodgeCounter=100;
+		if (dodgeCounter<=-200) {
+			dodgeCounter=200;
 		}
 		System.out.println(dodgeCounter);
 		

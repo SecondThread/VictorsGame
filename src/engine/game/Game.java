@@ -19,7 +19,7 @@ public class Game {
 	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
 	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
-	PlayerAI left=new SamurAISniper(1);
+	PlayerAI left=new SamurAI();
 	PlayerAI right=new SamurAISniper(2);
 	
 	public static Game getTwoPlayerGame() {

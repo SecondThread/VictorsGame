@@ -15,9 +15,8 @@ public class SamurAISniper extends PlayerAI {
 	}
 	
 	public Soldier[] getStartFormation(boolean onLeft, Color color) {
-		Soldier[] toReturn=new Soldier[2];
-		toReturn[0]=new Sniper(onLeft?50:Window.WIDTH-50, 2*Window.HEIGHT/3, color, new AASniper(team));
-		toReturn[1]=new Sniper(onLeft?50:Window.WIDTH-50, Window.HEIGHT/3, color, new AASniper(team));
+		Soldier[] toReturn=new Soldier[1];
+		toReturn[0]=new Sniper(onLeft?50:Window.WIDTH-50, Window.HEIGHT/2, color, new AAASniper(team));
 		return toReturn;	
 	}
 }
