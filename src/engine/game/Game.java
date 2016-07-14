@@ -11,6 +11,8 @@ import engine.background.Background;
 import engine.background.TwoPlayerBackground;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
+import samurAI.SamurAI;
+import samurAI.SamurAISniper;
 
 public class Game {
 	private Background background;
@@ -18,8 +20,13 @@ public class Game {
 	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
 	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
+<<<<<<< HEAD
 	PlayerAI left=new PlayerDI();
 	PlayerAI right=new PlayerAI();
+=======
+	PlayerAI left=new SamurAI();
+	PlayerAI right=new SamurAISniper(2);
+>>>>>>> refs/remotes/origin/master
 	
 	public static Game getTwoPlayerGame() {
 		return new Game(new TwoPlayerBackground());

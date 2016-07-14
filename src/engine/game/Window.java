@@ -3,6 +3,9 @@ package engine.game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -49,4 +52,16 @@ public class Window {
 		return toReturn;
 	}
 
+	public static void addKeyListener(KeyListener listener) {
+		frame.addKeyListener(listener);
+	}
+	
+	public static void addMouseListener(MouseListener listener) {
+		frame.addMouseListener(listener);
+	}
+	
+	public static void addMouseMotionListener(MouseMotionListener listener) {
+		frame.addMouseMotionListener(listener);
+	}
+	
 }

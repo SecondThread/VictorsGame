@@ -10,6 +10,7 @@ public class SoldierAI {
 	
 	public double direction=new Random().nextDouble()*6.28;
 	public double moveSpeed=0;//new Random().nextDouble();
+	protected int teamID=0;
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 	}
@@ -27,5 +28,9 @@ public class SoldierAI {
 		return moveSpeed;
 	}
 	
+	
+	public int getTeamID() {
+		return teamID;
+	}
 	
 }
