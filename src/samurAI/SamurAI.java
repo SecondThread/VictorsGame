@@ -16,4 +16,3 @@ public class SamurAI extends PlayerAI {
 		return toReturn;	
 	}
 }
-//dwdwd
