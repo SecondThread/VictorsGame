@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 import engine.background.Background;
 import engine.background.TwoPlayerBackground;
+import engine.networking.input.InputController;
 
 public class ClientGame {
 	private Background background;
-	ArrayList<ClientSoldier> soldiersAlive=new ArrayList<ClientSoldier>();
-	ArrayList<ClientBullet> bullets=new ArrayList<ClientBullet>();
+	private ArrayList<ClientSoldier> soldiersAlive=new ArrayList<ClientSoldier>();
+	private ArrayList<ClientBullet> bullets=new ArrayList<ClientBullet>();
+	private InputController inputController;
 	
 	public static ClientGame getTwoPlayerGame() {
 		return new ClientGame(new TwoPlayerBackground());
@@ -20,13 +22,14 @@ public class ClientGame {
 		this.background=background;
 		NetworkManager.initAsClient();
 		soldiersAlive=NetworkManager.getSoldiers(NetworkManager.getData());
+		inputController=new InputController();
 	}
 	
 	public void update() {
+		inputController.update();
 		String data=NetworkManager.getData();
 		soldiersAlive=NetworkManager.getSoldiers(data);
 		bullets=NetworkManager.getBullets(data);
-		//System.out.println(soldiersAlive.size()+"   "+data);
 	}
 	
 	public void render(BufferedImage toDrawOn) {

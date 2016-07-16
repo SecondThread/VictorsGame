@@ -7,6 +7,8 @@ public class MultiServer {
 	
 	public static volatile ConcurrentHashMap<String, String> map=new ConcurrentHashMap<String, String>();
 	
+	public static volatile int playerID=0;
+	
 	public static void main(String[] args) throws IOException {
 		ServerSocket serverSocket=null;
 		boolean listening=true;
@@ -20,7 +22,8 @@ public class MultiServer {
 		}
 
 		while (listening) {
-			new MultiServerThread(serverSocket.accept()).start();
+			new MultiServerThread(serverSocket.accept(), playerID).start();
+			playerID++;
 		}
 
 		serverSocket.close();

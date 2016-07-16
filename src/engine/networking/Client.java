@@ -8,12 +8,14 @@ public class Client {
 	private static Socket kkSocket=null;
 	private static PrintWriter out=null;
 	private static BufferedReader in=null;
+	private static int playerID;
 	
 	public static void clientInit() {
 		try {
 			kkSocket=new Socket("localhost", 7555);
 			out=new PrintWriter(kkSocket.getOutputStream(), true);
 			in=new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+			playerID=Integer.parseInt(getIDFromServer());
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host: localhost.");
 			System.exit(1);
@@ -43,6 +45,15 @@ public class Client {
 		
 	}
 	
+	private static String getIDFromServer() {
+		try {
+			return in.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "ERROR when getting playerID";
+	}
+	
 	public static String sendCommand(String command) {
 		out.println(command);
 		try {
@@ -51,6 +62,10 @@ public class Client {
 			e.printStackTrace();
 		}
 		return "ERROR";
+	}
+	
+	public static int getPlayerID() {
+		return playerID;
 	}
 	
 }

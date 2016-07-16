@@ -114,4 +114,18 @@ public class NetworkManager {
 		}
 		return toReturn;
 	}
+	
+	public static void sendKeyboardInputs(String inputs) {
+		int player=Client.getPlayerID();
+		Client.sendCommand("set "+player+" "+inputs);
+	}
+	
+	public static String getKeyboardInputs(int player) {
+		return Client.sendCommand("get "+player+" .");
+	}
+	
+	public static void resetPlayers() {
+		Client.sendCommand("resetPlayers");
+	}
+	
 }

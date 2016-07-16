@@ -13,10 +13,12 @@ public class BigKahunaGame extends Game {
 	protected BigKahunaGame(Background background) {
 		super(background);
 		NetworkManager.initAsClient();
+		NetworkManager.resetPlayers();
 	}
 	
 	public void networkUpdate() {
 		NetworkManager.sendSoldierPositions(soldiersAlive, bullets);
+		System.out.println(NetworkManager.getKeyboardInputs(0));
 	}
 
 }
