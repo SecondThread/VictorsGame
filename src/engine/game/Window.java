@@ -16,7 +16,7 @@ public class Window {
 	private static JPanel outerPanel;
 	public static final int WIDTH=1600, HEIGHT=900;
 	
-	private static int scaleFactor=2;
+	public static final int scaleFactor=2;
 	
 	public static void init() {
 		outerPanel=new JPanel();
@@ -57,11 +57,11 @@ public class Window {
 	}
 	
 	public static void addMouseListener(MouseListener listener) {
-		frame.addMouseListener(listener);
+		outerPanel.addMouseListener(listener);
 	}
 	
 	public static void addMouseMotionListener(MouseMotionListener listener) {
-		frame.addMouseMotionListener(listener);
+		outerPanel.addMouseMotionListener(listener);
 	}
 	
 }

@@ -1,45 +1,27 @@
 package engine.networking.input;
 
-import java.nio.channels.NetworkChannel;
-
 import engine.networking.NetworkManager;
-import samurAI.input.Keyboard;
 
 public class InputController {
 	private Keyboard keyboard;
+	private MouseController mouse;
 	
 	public InputController() {
 		keyboard=new Keyboard();
+		mouse=new MouseController();
+		//keyboard.setDisplayKeycodeMessages(true);
 	}
 	
 	public void update() {
 		keyboard.update();
 		String pressedValues="";
-		if (keyboard.getKeyDown(68)) {//left
-			pressedValues+="1";
-		}
-		else {
-			pressedValues+="0";
-		}
-		if (keyboard.getKeyDown(65)) {//right
-			pressedValues+="1";
-		}
-		else {
-			pressedValues+="0";
-		}
-		if (keyboard.getKeyDown(87)) {//up
-			pressedValues+="1";
-		}
-		else {
-			pressedValues+="0";
-		}
-		if (keyboard.getKeyDown(83)) {//down
-			pressedValues+="1";
-		}
-		else {
-			pressedValues+="0";
-		}
-	
+		pressedValues+=keyboard.getKeyDown(68)?"1":"0";
+		pressedValues+=keyboard.getKeyDown(65)?"1":"0";
+		pressedValues+=keyboard.getKeyDown(87)?"1":"0";
+		pressedValues+=keyboard.getKeyDown(83)?"1":"0";
+		pressedValues+=","+mouse.getX()+","+mouse.getY()+",";
+		pressedValues+=keyboard.getKeyDown(32)?"1":"0";
+		
 		NetworkManager.sendKeyboardInputs(pressedValues);
 	}
 	

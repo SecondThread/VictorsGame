@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import engine.background.Background;
 import engine.background.TwoPlayerBackground;
 import engine.networking.input.InputController;
+import engine.networking.input.MouseController;
 
 public class ClientGame {
 	private Background background;

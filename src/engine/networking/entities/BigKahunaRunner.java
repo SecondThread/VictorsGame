@@ -17,6 +17,10 @@ public class BigKahunaRunner extends SoldierAI {
 	}
 
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
+		tryToMove();
+	}
+	
+	private void tryToMove() {
 		xVelocity=0;
 		yVelocity=0;
 		String input=NetworkManager.getKeyboardInputs(player);

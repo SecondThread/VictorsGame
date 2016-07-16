@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import engine.ai.SoldierAI;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
-import samurAI.input.Keyboard;
+import engine.networking.input.Keyboard;
 
 public class MovableRunner extends SoldierAI {
 	private Keyboard keyboard=new Keyboard();
