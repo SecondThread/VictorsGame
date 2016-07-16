@@ -79,7 +79,6 @@ public class AAASniper extends SniperAI {
 		if (dodgeCounter<=-200) {
 			dodgeCounter=200;
 		}
-		System.out.println(dodgeCounter);
 		
 		moveSpeed=1;
 		if (dodgeCounter>0) {

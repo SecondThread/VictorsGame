@@ -21,7 +21,6 @@ public class MultiServerThread extends Thread {
 			PrintWriter out=new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String inputLine;
-			ConcurrentHashMap<String, String> map=new ConcurrentHashMap<String, String>();
 			
 			while ((inputLine=in.readLine())!=null) {
 				String[] arguements=inputLine.split(" ");
@@ -32,18 +31,18 @@ public class MultiServerThread extends Thread {
 				}
 				if (command.equalsIgnoreCase("set")) {
 					String name=arguements[1], value=arguements[2];
-					map.put(name, value);
+					MultiServer.map.put(name, value);
 					out.println("ACK, set");
 				}
 				else {
 					if (command.equalsIgnoreCase("get")) {
 						String name=arguements[1];
-						if (map.containsKey(name)) {
-							out.println("ACK: "+map.get(name));
+						if (MultiServer.map.containsKey(name)) {
+							out.println(MultiServer.map.get(name));
 						}
 						else {
 							if (arguements.length>2) {
-								out.println("ACK: "+arguements[2]);
+								out.println(arguements[2]);
 							}
 							else {
 								out.println("NAC: Key Not Found");

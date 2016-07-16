@@ -70,4 +70,8 @@ public class Sniper extends Soldier {
 		return shootCounter; 
 	}
 	
+	public double getGunAngle() {
+		return gunAngle;
+	}
+	
 }

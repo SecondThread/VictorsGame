@@ -43,7 +43,7 @@ public class Client {
 		
 	}
 	
-	public static String setCommand(String command) {
+	public static String sendCommand(String command) {
 		out.println(command);
 		try {
 			return in.readLine();

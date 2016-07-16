@@ -1,8 +1,12 @@
 package engine.networking;
 import java.io.*;
 import java.net.ServerSocket;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MultiServer {
+	
+	public static volatile ConcurrentHashMap<String, String> map=new ConcurrentHashMap<String, String>();
+	
 	public static void main(String[] args) throws IOException {
 		ServerSocket serverSocket=null;
 		boolean listening=true;

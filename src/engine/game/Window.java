@@ -16,7 +16,7 @@ public class Window {
 	private static JPanel outerPanel;
 	public static final int WIDTH=1600, HEIGHT=900;
 	
-	private static int scaleFactor=1;
+	private static int scaleFactor=2;
 	
 	public static void init() {
 		outerPanel=new JPanel();
@@ -38,7 +38,7 @@ public class Window {
 	public static void paint(BufferedImage image) {
 		Graphics g=outerPanel.getGraphics();
 		
-		g.drawImage(image, 0, HEIGHT, WIDTH/scaleFactor, -HEIGHT/scaleFactor, null);
+		g.drawImage(image, 0, HEIGHT/scaleFactor, WIDTH/scaleFactor, -HEIGHT/scaleFactor, null);
 		g.dispose();
 	}
 	

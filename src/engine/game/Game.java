@@ -16,8 +16,8 @@ import samurAI.SamurAISniper;
 public class Game {
 	private Background background;
 	private Color color1=new Color(220, 53, 34), color2=new Color(217, 203, 158);
-	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
-	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
+	protected ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
+	protected ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
 	PlayerAI left=new SamurAI();
 	PlayerAI right=new SamurAISniper(2);
@@ -26,7 +26,7 @@ public class Game {
 		return new Game(new TwoPlayerBackground());
 	}
 	
-	private Game(Background background) {
+	protected Game(Background background) {
 		this.background=background;
 		Soldier[] leftSoldiers=left.getStartFormation(true, color1);
 		Soldier[] rightSoldiers=right.getStartFormation(false, color2);
