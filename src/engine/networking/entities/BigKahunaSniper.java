@@ -19,7 +19,6 @@ public class BigKahunaSniper extends SniperAI {
 		this.player=player;
 	}
 	
-
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 		if (me==null) {
 			for (Soldier s : soldiers) {

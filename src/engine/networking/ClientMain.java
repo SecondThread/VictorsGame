@@ -4,12 +4,15 @@ import java.awt.image.BufferedImage;
 
 import engine.game.Main;
 import engine.game.Window;
+import engine.networking.input.SoldierChooser;
 
 public class ClientMain {
 	private static ClientGame game;
 	private static int updatesPerSecond=24;
+	private static int soldierType;
 	
 	public static void main(String[] args) {
+		soldierType=SoldierChooser.chooseType();
 		Window.init();
 		Main.wait(.1);
 		game=ClientGame.getTwoPlayerGame();
@@ -24,7 +27,6 @@ public class ClientMain {
 		long lastUpdateFrames=System.currentTimeMillis();
 		
 		while (true) {
-
 			while (startTime+timeBetweenUpdates<System.currentTimeMillis()) {
 				update();
 				updates++;
@@ -49,6 +51,10 @@ public class ClientMain {
 		BufferedImage toDrawOn=new BufferedImage(Window.WIDTH, Window.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		game.render(toDrawOn);
 		Window.paint(toDrawOn);
+	}
+	
+	public static int getSoldierType() {
+		return soldierType;
 	}
 	
 }

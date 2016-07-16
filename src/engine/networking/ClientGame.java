@@ -22,6 +22,7 @@ public class ClientGame {
 	private ClientGame(Background background) {
 		this.background=background;
 		NetworkManager.initAsClient();
+		NetworkManager.sendSoldierType(Client.getPlayerID(), ClientMain.getSoldierType());
 		soldiersAlive=NetworkManager.getSoldiers(NetworkManager.getData());
 		inputController=new InputController();
 	}

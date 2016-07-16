@@ -10,6 +10,7 @@ import engine.background.Background;
 import engine.background.TwoPlayerBackground;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
+import engine.networking.BigKahunaGame;
 import samurAI.SamurAI;
 import samurAI.SamurAISniper;
 
@@ -61,6 +62,11 @@ public class Game {
 				i--;
 			}
 		}
+		
+		soldiersAlive.removeAll(BigKahunaGame.soldiersToRemove);
+		soldiersAlive.addAll(BigKahunaGame.soldiersToAdd);
+		BigKahunaGame.soldiersToAdd.clear();
+		BigKahunaGame.soldiersToRemove.clear();
 	}
 	
 	public void render(BufferedImage toDrawOn) {

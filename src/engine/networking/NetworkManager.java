@@ -126,6 +126,17 @@ public class NetworkManager {
 	
 	public static void resetPlayers() {
 		Client.sendCommand("resetPlayers");
+		for (int i=0; i<10; i++) {
+			Client.sendCommand("set "+i+"type -1");	
+		}
+	}
+	
+	public static void sendSoldierType(int player, int soldierType) {
+		Client.sendCommand("set "+player+"type "+soldierType);
+	}
+	
+	public static int getSoldierType(int player) {
+		return Integer.parseInt(Client.sendCommand("get "+player+"type -1"));
 	}
 	
 }
