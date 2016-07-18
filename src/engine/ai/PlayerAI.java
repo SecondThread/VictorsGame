@@ -25,10 +25,10 @@ public class PlayerAI {
 		}
 		for (int i=0; i<toReturn.length; i++) {
 			if (i%2==0) {				
-				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(), 1);
+				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(12), 1);
 			}
 			else {
-				toReturn[i]=new Sniper(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new SniperAI());
+				toReturn[i]=new Sniper(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new SniperAI(12));
 			}
 		}
 		return toReturn;

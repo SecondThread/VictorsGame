@@ -2,7 +2,7 @@ package engine.networking.entities;
 
 import java.util.ArrayList;
 
-import engine.ai.SoldierAI;
+import engine.ai.RunnerAI;
 import engine.entities.Bullet;
 import engine.entities.Runner;
 import engine.entities.Sniper;
@@ -11,12 +11,13 @@ import engine.entities.Tank;
 import engine.networking.BigKahunaGame;
 import engine.networking.NetworkManager;
 
-public class BigKahunaChangable extends SoldierAI {
+public class BigKahunaChangable extends RunnerAI {
 	private int player;
 	private boolean onLeft;
 	private Soldier me=null;
 	
 	public BigKahunaChangable(int player, boolean onLeft) {
+		super(player);
 		this.player=player;
 		this.onLeft=onLeft;
 	}

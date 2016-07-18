@@ -2,17 +2,19 @@ package engine.networking.entities;
 
 import java.util.ArrayList;
 
-import engine.ai.SoldierAI;
+import engine.ai.RunnerAI;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
 import engine.networking.NetworkManager;
 
-public class BigKahunaRunner extends SoldierAI {
+public class BigKahunaRunner extends RunnerAI {
 
 	private double xVelocity=0, yVelocity=0;
 	private int player=0;
+	private String input="";
 	
 	public BigKahunaRunner(int player) {
+		super(player);
 		this.player=player;
 	}
 
@@ -23,7 +25,7 @@ public class BigKahunaRunner extends SoldierAI {
 	private void tryToMove() {
 		xVelocity=0;
 		yVelocity=0;
-		String input=NetworkManager.getKeyboardInputs(player);
+		input=NetworkManager.getKeyboardInputs(player);
 		boolean right=false, left=false, up=false, down=false;
 		if (input.length()>1) {
 			right=input.charAt(0)=='1';
@@ -51,6 +53,13 @@ public class BigKahunaRunner extends SoldierAI {
 		else {			
 			moveSpeed=1;
 		}
+	}
+	
+	public boolean blinkIfPossible() {
+		if (!input.contains(",")) {
+			return false;
+		}
+		return input.split(",")[3].equals("1");
 	}
 	
 }

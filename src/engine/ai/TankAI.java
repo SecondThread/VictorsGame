@@ -1,6 +1,10 @@
 package engine.ai;
 
 public class TankAI extends SoldierAI {
+	public TankAI(int teamID) {
+		super(teamID);
+	}
+
 	/**
 	 * gets 1, 0, or -1 for turn the shield counterclockwise(1), clockwise(-1), or not at all(0)
 	 * @return

@@ -16,6 +16,7 @@ public class BigKahunaTank extends TankAI {
 	private double shieldAngle;
 
 	public BigKahunaTank(int player) {
+		super(player);
 		this.player=player;
 	}
 

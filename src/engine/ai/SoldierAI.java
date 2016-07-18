@@ -12,6 +12,10 @@ public class SoldierAI {
 	public double moveSpeed=0;//new Random().nextDouble();
 	protected int teamID=0;
 	
+	public SoldierAI(int teamID) {
+		this.teamID=teamID;
+	}
+	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 	}
 	

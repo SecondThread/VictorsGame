@@ -16,6 +16,7 @@ public class AASniper extends SniperAI {
 	private int dodgeCounter=50;
 	
 	public AASniper(int team) {
+		super(team);
 		teamID=team;
 	}
 	

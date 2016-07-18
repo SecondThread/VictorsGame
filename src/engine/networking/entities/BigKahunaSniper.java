@@ -16,6 +16,7 @@ public class BigKahunaSniper extends SniperAI {
 	private double gunAngle;
 
 	public BigKahunaSniper(int player) {
+		super(player);
 		this.player=player;
 	}
 	

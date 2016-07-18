@@ -8,6 +8,10 @@ import engine.entities.Soldier;
 import samurAI.movement.EmergencyMovement;
 
 public class MovableRunner extends SoldierAI {
+	public MovableRunner(int teamID) {
+		super(teamID);
+	}
+
 	private EmergencyMovement movement=new EmergencyMovement();
 	private Soldier mySoldier;
 	

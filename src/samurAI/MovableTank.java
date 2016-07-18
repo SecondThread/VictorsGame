@@ -4,38 +4,59 @@ import java.util.ArrayList;
 
 import engine.ai.TankAI;
 import engine.entities.Bullet;
+import engine.entities.Sniper;
 import engine.entities.Soldier;
-import engine.networking.input.Keyboard;
+import engine.entities.Tank;
+import samurAI.tank.EmergencyBlocker;
+import samurAI.tank.SmartTank;
 
-public class MovableTank extends TankAI{
-	private Keyboard keyboard=new Keyboard();
-	private double xVelocity=0, yVelocity=0;
+public class MovableTank extends TankAI {
+	public MovableTank(int teamID) {
+		super(teamID);
+	}
+
+	private SmartTank movement=new SmartTank();
+	private Soldier mySoldier;
+	private int directionToTurn=0;
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
-		
-		xVelocity=0;
-		yVelocity=0;
-		keyboard.update();
-		//keyboard.setDisplayKeycodeMessages(true);
-		if (keyboard.getKeyDown(68)) {//left
-			xVelocity++;
+		updateMySoldier(soldiers);
+		movement.update(getNearestSniper(soldiers, false), bullets, (Tank)mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
+		moveSpeed=movement.getSpeed();
+		direction=movement.getDirection();
+		directionToTurn=movement.getMoveShieldDirection();
+
+	}
+	
+	private void updateMySoldier(ArrayList<Soldier> soldiers) {
+		for (Soldier s:soldiers) {
+			if (s.getAI()==this) {
+				mySoldier=s;
+			}
 		}
-		if (keyboard.getKeyDown(65)) {//right
-			xVelocity--;
+	}
+	
+	public int getShieldTurnDirection() {
+		return directionToTurn;
+	}
+	
+	public Soldier getNearestSniper(ArrayList<Soldier> soldiers, boolean onlyAgainstSniper) {
+		Soldier toReturn=null;
+		for (Soldier s:soldiers) {
+			if (onlyAgainstSniper&&!(s instanceof Sniper)) {
+				continue;
+			}
+			if (s.getAI().getTeamID()==mySoldier.getAI().getTeamID()) {
+				continue;
+			}
+			if (toReturn==null) {
+				toReturn=s;
+				continue;
+			}
+			if (toReturn.getPosition().distance(mySoldier.getPosition())>s.getPosition().distance(mySoldier.getPosition())) {
+				toReturn=s;
+			}
 		}
-		if (keyboard.getKeyDown(87)) {//up
-			yVelocity++;
-		}
-		if (keyboard.getKeyDown(83)) {//down
-			yVelocity--;
-		}
-		
-		direction=Math.atan2(yVelocity, xVelocity);
-		if (Math.abs(xVelocity)<0.1&&Math.abs(yVelocity)<0.1) {
-			moveSpeed=0;
-		}
-		else {			
-			moveSpeed=1;
-		}
+		return toReturn;
 	}
 }

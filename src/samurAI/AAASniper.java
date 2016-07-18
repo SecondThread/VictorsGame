@@ -16,6 +16,7 @@ public class AAASniper extends SniperAI {
 	private SmartMovement movement=new SmartMovement();
 	
 	public AAASniper(int team) {
+		super(team);
 		teamID=team;
 	}
 	

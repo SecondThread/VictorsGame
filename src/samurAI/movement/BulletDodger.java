@@ -17,8 +17,12 @@ public class BulletDodger {
 	}
 	
 	public boolean needToDodge(Point location, Bullet bullet, double radius) {
+		return needToDodge(location, bullet, radius, 2);
+	}
+	
+	public boolean needToDodge(Point location, Bullet bullet, double radius, double radiusMultiplier) {
 		double distanceFromCenter=distanceFromBullet(location, bullet);
-		return distanceFromCenter<radius*2&&!bulletPastMe(location, bullet);
+		return distanceFromCenter<radius*radiusMultiplier&&!bulletPastMe(location, bullet);		
 	}
 	
 	public double getDirectionToMove(Point location, Bullet toDodge) {
