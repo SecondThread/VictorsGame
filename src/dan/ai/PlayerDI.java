@@ -11,20 +11,12 @@ import engine.game.Window;
 
 public class PlayerDI extends PlayerAI {
 	private ArrayList<Soldier> myTeam;
-	private Color myColor = new Color(220, 53, 34);
 	private ArrayList<Soldier> otherTeam;
+	private int teamID = 5;
 
 	public Soldier[] getStartFormation(boolean onLeft, Color color) {
-		Soldier[] toReturn = new Soldier[1];
-		int x = 50;
-		if (onLeft) {
-			x = Window.WIDTH - x;
-		}
-		for (int i = 0; i < toReturn.length; i++) {
-			SniperDI temp = new SniperDI();
-			toReturn[i] = new Sniper(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, temp);
-			temp.setObject(toReturn[i]);
-		}
+		Formations.init(onLeft, color);
+		Soldier[] toReturn = Formations.allTank(1);
 		return toReturn;
 	}
 
@@ -32,7 +24,7 @@ public class PlayerDI extends PlayerAI {
 		ArrayList<Soldier> myTeam = new ArrayList<Soldier>();
 		ArrayList<Soldier> otherTeam = new ArrayList<Soldier>();
 		for (Soldier x : aliveSoldiers) {
-			if (x.color.equals(myColor)) {
+			if (x.getAI().getTeamID() == (teamID)) {
 				myTeam.add(x);
 			} else {
 				otherTeam.add(x);

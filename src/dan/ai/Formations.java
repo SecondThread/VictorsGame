@@ -19,7 +19,7 @@ public class Formations {
 	public static Soldier[] allSniper(int num){
 		Soldier[] toReturn = new Soldier[num];
 		int x = 50;
-		if (onLeft) {
+		if (!onLeft) {
 			x = Window.WIDTH - x;
 		}
 		for (int i = 0; i < toReturn.length; i++) {
@@ -33,11 +33,13 @@ public class Formations {
 	public static Soldier[] allTank(int num){
 		Soldier[] toReturn = new Soldier[num];
 		int x = 50;
-		if (onLeft) {
+		double sAngle = 0;
+		if (!onLeft) {
 			x = Window.WIDTH - x;
+			sAngle = 3.14;
 		}
 		for (int i = 0; i < toReturn.length; i++) {
-			toReturn[i] = new Tank(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, new TankDI(),3.14);
+			toReturn[i] = new Tank(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, new TankDI(),sAngle);
 		}
 		return toReturn;
 	}
@@ -45,8 +47,10 @@ public class Formations {
 	public static Soldier[] halfNHalf(int num){
 		Soldier[] toReturn = new Soldier[num];
 		int x = 50;
-		if (onLeft) {
+		double sAngle = 0;
+		if (!onLeft) {
 			x = Window.WIDTH - x;
+			sAngle = 3.14;
 		}
 		for(int i = 0; i < toReturn.length; i++){
 			if(i % 2 != 0){
@@ -54,7 +58,7 @@ public class Formations {
 				toReturn[i] = new Sniper(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, temp);
 				temp.setObject(toReturn[i]);
 			}else{
-				toReturn[i] = new Tank(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, new TankDI(),3.14);
+				toReturn[i] = new Tank(x, (i + 1) * Window.HEIGHT / (toReturn.length + 1), color, new TankDI(),sAngle);
 			}
 		}
 		return toReturn;

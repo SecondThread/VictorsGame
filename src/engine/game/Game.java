@@ -20,13 +20,10 @@ public class Game {
 	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
 	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
-<<<<<<< HEAD
+
 	PlayerAI left=new PlayerDI();
-	PlayerAI right=new PlayerAI();
-=======
-	PlayerAI left=new SamurAI();
 	PlayerAI right=new SamurAISniper(2);
->>>>>>> refs/remotes/origin/master
+
 	
 	public static Game getTwoPlayerGame() {
 		return new Game(new TwoPlayerBackground());

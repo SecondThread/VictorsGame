@@ -28,6 +28,9 @@ public class SoldierAI {
 		return moveSpeed;
 	}
 	
+	public void setTeamID(int team){
+		teamID = team;
+	}
 	
 	public int getTeamID() {
 		return teamID;
