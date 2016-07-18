@@ -87,4 +87,8 @@ public class Tank extends Soldier {
 		return shield;
 	}
 	
+	public double getShieldAngle() {
+		return shieldAngle;
+	}
+	
 }

@@ -10,14 +10,16 @@ import engine.background.Background;
 import engine.background.TwoPlayerBackground;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
+import engine.networking.BigKahunaGame;
+import engine.networking.entities.BigKahunaChangable;
 import samurAI.SamurAI;
 import samurAI.SamurAISniper;
 
 public class Game {
 	private Background background;
 	private Color color1=new Color(220, 53, 34), color2=new Color(217, 203, 158);
-	ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
-	ArrayList<Bullet> bullets=new ArrayList<Bullet>();
+	protected ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
+	protected ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
 	PlayerAI left=new SamurAI();
 	PlayerAI right=new SamurAISniper(2);
@@ -26,7 +28,7 @@ public class Game {
 		return new Game(new TwoPlayerBackground());
 	}
 	
-	private Game(Background background) {
+	protected Game(Background background) {
 		this.background=background;
 		Soldier[] leftSoldiers=left.getStartFormation(true, color1);
 		Soldier[] rightSoldiers=right.getStartFormation(false, color2);
@@ -37,9 +39,32 @@ public class Game {
 	}
 	
 	public void update() {
-		left.update(soldiersAlive, bullets);
-		right.update(soldiersAlive, bullets);
 		
+		if (playersAreStillConnecting()) {
+			updateConnectingSoldiers();
+		}
+		else {
+			left.update(soldiersAlive, bullets);
+			right.update(soldiersAlive, bullets);
+			updateSoldiersAndBullets();
+		}
+		
+		soldiersAlive.removeAll(BigKahunaGame.soldiersToRemove);
+		soldiersAlive.addAll(BigKahunaGame.soldiersToAdd);
+		BigKahunaGame.soldiersToAdd.clear();
+		BigKahunaGame.soldiersToRemove.clear();
+	}
+	
+	private boolean playersAreStillConnecting() {
+		for (Soldier s:soldiersAlive) {
+			if (s.getAI() instanceof BigKahunaChangable) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void updateSoldiersAndBullets() {
 		for (Soldier s:soldiersAlive) {
 			s.update(soldiersAlive, bullets);
 		}
@@ -59,6 +84,14 @@ public class Game {
 			if (bullets.get(i).isDead()) {
 				bullets.remove(i);
 				i--;
+			}
+		}
+	}
+	
+	private void updateConnectingSoldiers() {
+		for (Soldier s:soldiersAlive) {
+			if (s.getAI() instanceof BigKahunaChangable) {
+				s.update(soldiersAlive, bullets);
 			}
 		}
 	}

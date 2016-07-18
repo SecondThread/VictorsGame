@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import engine.ai.TankAI;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
-import samurAI.input.Keyboard;
+import engine.networking.input.Keyboard;
 
 public class MovableTank extends TankAI{
 	private Keyboard keyboard=new Keyboard();
