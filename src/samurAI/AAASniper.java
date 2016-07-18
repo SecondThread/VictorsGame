@@ -6,14 +6,14 @@ import engine.ai.SniperAI;
 import engine.entities.Bullet;
 import engine.entities.Point;
 import engine.entities.Soldier;
+import samurAI.movement.SmartMovement;
 
 public class AAASniper extends SniperAI {
 	private Soldier soldierToTarget=null;
 	private Soldier mySoldier;
 	private double gunAngle=0;
 	
-	private boolean dodge=true;
-	private int dodgeCounter=50;
+	private SmartMovement movement=new SmartMovement();
 	
 	public AAASniper(int team) {
 		teamID=team;
@@ -26,9 +26,13 @@ public class AAASniper extends SniperAI {
 			targetSoldier();
 		}		
 		
-		if (dodge) {
-			tryToDodge();
+		
+		Soldier closest=getClosestSoldier(soldiers);
+		if (closest!=null) {
+			movement.update(closest, bullets, mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
 		}
+		direction=movement.getDirection();
+		moveSpeed=movement.getSpeed();
 	}
 	
 	private void getSoldierToTarget(ArrayList<Soldier> soldiers) {
@@ -73,20 +77,25 @@ public class AAASniper extends SniperAI {
 	public double getGunAngle() {
 		return gunAngle;
 	}
-	
-	private void tryToDodge() {
-		dodgeCounter-=1;
-		if (dodgeCounter<=-200) {
-			dodgeCounter=200;
-		}
-		
-		moveSpeed=1;
-		if (dodgeCounter>0) {
-			direction=Math.PI/2;
-		}
-		else {
-			direction=3*Math.PI/2;
-		}
-	}
 
+	public boolean fireIfPossible() {
+		return movement.goodTimeToShoot();
+	}
+	
+	public Soldier getClosestSoldier(ArrayList<Soldier> soldiers) {
+		Soldier closest=null;
+		for (Soldier s:soldiers) {
+			if (s==mySoldier) {
+				continue;
+			}
+			if (closest==null) {
+				closest=s;
+			}
+			if (mySoldier.getPosition().distance(closest.getPosition())>mySoldier.getPosition().distance(s.getPosition())) {
+				closest=s;
+			}
+		}
+		return closest;
+	}
+	
 }

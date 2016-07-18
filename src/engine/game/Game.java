@@ -11,6 +11,7 @@ import engine.background.TwoPlayerBackground;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
 import engine.networking.BigKahunaGame;
+import engine.networking.entities.BigKahunaChangable;
 import samurAI.SamurAI;
 import samurAI.SamurAISniper;
 
@@ -38,9 +39,32 @@ public class Game {
 	}
 	
 	public void update() {
-		left.update(soldiersAlive, bullets);
-		right.update(soldiersAlive, bullets);
 		
+		if (playersAreStillConnecting()) {
+			updateConnectingSoldiers();
+		}
+		else {
+			left.update(soldiersAlive, bullets);
+			right.update(soldiersAlive, bullets);
+			updateSoldiersAndBullets();
+		}
+		
+		soldiersAlive.removeAll(BigKahunaGame.soldiersToRemove);
+		soldiersAlive.addAll(BigKahunaGame.soldiersToAdd);
+		BigKahunaGame.soldiersToAdd.clear();
+		BigKahunaGame.soldiersToRemove.clear();
+	}
+	
+	private boolean playersAreStillConnecting() {
+		for (Soldier s:soldiersAlive) {
+			if (s.getAI() instanceof BigKahunaChangable) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void updateSoldiersAndBullets() {
 		for (Soldier s:soldiersAlive) {
 			s.update(soldiersAlive, bullets);
 		}
@@ -62,11 +86,14 @@ public class Game {
 				i--;
 			}
 		}
-		
-		soldiersAlive.removeAll(BigKahunaGame.soldiersToRemove);
-		soldiersAlive.addAll(BigKahunaGame.soldiersToAdd);
-		BigKahunaGame.soldiersToAdd.clear();
-		BigKahunaGame.soldiersToRemove.clear();
+	}
+	
+	private void updateConnectingSoldiers() {
+		for (Soldier s:soldiersAlive) {
+			if (s.getAI() instanceof BigKahunaChangable) {
+				s.update(soldiersAlive, bullets);
+			}
+		}
 	}
 	
 	public void render(BufferedImage toDrawOn) {

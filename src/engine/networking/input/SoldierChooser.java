@@ -20,6 +20,7 @@ public class SoldierChooser {
 		while(choice==-1) {
 			Main.wait(0.01);
 		}
+		frame.dispose();
 		return choice;
 	}
 	

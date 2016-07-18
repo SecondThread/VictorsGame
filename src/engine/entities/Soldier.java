@@ -11,7 +11,8 @@ import engine.game.Window;
 
 public class Soldier {
 	
-	private double x, y, radius=15, xVelocity=0, yVelocity=0;
+	public static final double radius=15;
+	private double x, y, xVelocity=0, yVelocity=0;
 	private Color color;
 	private Polygon shape=new Polygon(), shapeToReturn;
 	private int points=40;
