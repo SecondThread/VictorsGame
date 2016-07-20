@@ -18,6 +18,8 @@ public class Window {
 	
 	public static final int scaleFactor=2;
 	
+	public static final boolean fancyMode=true;
+	
 	public static void init() {
 		outerPanel=new JPanel();
 		outerPanel.setPreferredSize(new Dimension(WIDTH/scaleFactor, HEIGHT/scaleFactor));

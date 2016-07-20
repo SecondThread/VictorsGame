@@ -14,7 +14,6 @@ public class Soldier {
 	public static final double radius=15;
 	private double x, y;
 	protected double xVelocity=0, yVelocity=0;
-	private Color color;
 	private Polygon shape=new Polygon(), shapeToReturn;
 	private int points=40;
 	
@@ -22,13 +21,14 @@ public class Soldier {
 	protected double acceleration=.04, friction=0.99;
 	
 	protected boolean isRunner=false;
+	private int team=0;
 	
 	private boolean dead=false;
 	
-	public Soldier(double x, double y, Color color, SoldierAI ai) {
+	public Soldier(double x, double y, int team, SoldierAI ai) {
 		this.x=x; 
 		this.y=y;
-		this.color=color;
+		this.team=team;
 		for (int i=0; i<points; i++) {
 			double theta=i*Math.PI*2/points;
 			shape.addPoint((int)(radius*Math.cos(theta)), (int)(radius*Math.sin(theta)));
@@ -66,7 +66,7 @@ public class Soldier {
 	
 	public void render(Graphics2D g) {
 		shape.translate((int)x, (int) (y));
-		g.setColor(color);
+		g.setColor(Color.red);
 		g.fill(shape);
 		subRender(g);
 		shape.translate(-(int)x, -(int)(y));
@@ -154,13 +154,16 @@ public class Soldier {
 	public SoldierAI getAI() {
 		return ai;
 	}
-
-	public void setColor(Color color) {
-		this.color=color;
+	
+	public int getTeam() {
+		return team;
 	}
 	
 	public Color getColor() {
-		return color;
+		if (team==0) {
+			return Color.red;
+		}
+		return Color.blue;
 	}
 	
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import engine.ai.PlayerAI;
 import engine.background.Background;
+import engine.background.FancyBackground;
 import engine.background.TwoPlayerBackground;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
@@ -22,16 +23,20 @@ public class Game {
 	protected ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
 	PlayerAI left=new SamurAI();
-	PlayerAI right=new SamurAISniper(2);
+	PlayerAI right=new SamurAISniper();
 	
 	public static Game getTwoPlayerGame() {
-		return new Game(new TwoPlayerBackground());
+		Background background=new TwoPlayerBackground();
+		if (Window.fancyMode) {
+			background=new FancyBackground();
+		}
+		return new Game(background);
 	}
 	
 	protected Game(Background background) {
 		this.background=background;
-		Soldier[] leftSoldiers=left.getStartFormation(true, color1);
-		Soldier[] rightSoldiers=right.getStartFormation(false, color2);
+		Soldier[] leftSoldiers=left.getStartFormation(true, 0);
+		Soldier[] rightSoldiers=right.getStartFormation(false, 1);
 		for (Soldier s:leftSoldiers)
 			soldiersAlive.add(s);
 		for (Soldier s:rightSoldiers)

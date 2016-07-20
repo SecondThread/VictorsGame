@@ -1,6 +1,5 @@
 package engine.ai;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import engine.entities.Bullet;
@@ -17,7 +16,7 @@ public class PlayerAI {
 	 * @param color
 	 * @return
 	 */
-	public Soldier[] getStartFormation(boolean onLeft, Color color) {
+	public Soldier[] getStartFormation(boolean onLeft, int team) {
 		Soldier[] toReturn=new Soldier[9];
 		int x=50;
 		if (!onLeft) {
@@ -25,10 +24,10 @@ public class PlayerAI {
 		}
 		for (int i=0; i<toReturn.length; i++) {
 			if (i%2==0) {				
-				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new TankAI(12), 1);
+				toReturn[i]=new Tank(x, (i+1)*Window.HEIGHT/(toReturn.length+1), team, new TankAI(12), 1);
 			}
 			else {
-				toReturn[i]=new Sniper(x, (i+1)*Window.HEIGHT/(toReturn.length+1), color, new SniperAI(12));
+				toReturn[i]=new Sniper(x, (i+1)*Window.HEIGHT/(toReturn.length+1), team, new SniperAI(12));
 			}
 		}
 		return toReturn;

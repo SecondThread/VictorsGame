@@ -2,10 +2,13 @@ package engine.entities;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
 import engine.ai.SniperAI;
+import engine.game.Sprite;
+import engine.game.Window;
 
 public class Sniper extends Soldier {
 	private SniperAI ai;
@@ -14,8 +17,8 @@ public class Sniper extends Soldier {
 	private Polygon gun;
 	private int shootCounter=0, maxShootCounter=120;
 	
-	public Sniper(double x, double y, Color color, SniperAI ai) {
-		super(x, y, color, ai);
+	public Sniper(double x, double y, int team, SniperAI ai) {
+		super(x, y, team, ai);
 		this.ai=ai;
 	}
 	
@@ -37,6 +40,26 @@ public class Sniper extends Soldier {
 		gun.addPoint((int)(bottomRight.x), (int)(bottomRight.y));
 		gun.addPoint((int)(topRight.x), (int)(topRight.y));
 		gun.translate((int)(getPosition().x), (int)(getPosition().y));
+	}
+	
+	public void render(Graphics2D g) {
+		if (Window.fancyMode) {			
+			g.rotate(gunAngle, getPosition().x, getPosition().y);
+			double newRadius=getRadius()*44/40;
+			Image toDraw=null;
+			if (getTeam()==0) {
+				toDraw=Sprite.sniper.getBufferedImage();
+			}
+			else {
+				toDraw=Sprite.sniperBlue.getBufferedImage();
+			}
+			g.drawImage(toDraw, (int)(getPosition().x-newRadius), (int)(getPosition().y-newRadius), (int)(getRadius()*2*58/44), (int)(newRadius*2), null);
+			g.rotate(-gunAngle, getPosition().x, getPosition().y);
+			//subRender(g);
+		} 
+		else {
+			super.render(g);
+		}
 	}
 	
 	protected void subRender(Graphics2D g) {

@@ -5,9 +5,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import engine.background.Background;
+import engine.background.FancyBackground;
 import engine.background.TwoPlayerBackground;
+import engine.game.Window;
 import engine.networking.input.InputController;
-import engine.networking.input.MouseController;
 
 public class ClientGame {
 	private Background background;
@@ -16,7 +17,11 @@ public class ClientGame {
 	private InputController inputController;
 	
 	public static ClientGame getTwoPlayerGame() {
-		return new ClientGame(new TwoPlayerBackground());
+		Background background=new TwoPlayerBackground();
+		if (Window.fancyMode) {
+			background=new FancyBackground();
+		}
+		return new ClientGame(background);
 	}
 	
 	private ClientGame(Background background) {

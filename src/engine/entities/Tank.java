@@ -2,10 +2,13 @@ package engine.entities;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
 import engine.ai.TankAI;
+import engine.game.Sprite;
+import engine.game.Window;
 
 public class Tank extends Soldier {
 
@@ -15,10 +18,29 @@ public class Tank extends Soldier {
 	private Polygon shield;
 	private Point topLeft, topRight, bottomLeft, bottomRight;
 	
-	public Tank(double x, double y, Color color, TankAI ai, double startShieldAngle) {
-		super(x, y, color, ai);
+	public Tank(double x, double y, int team, TankAI ai, double startShieldAngle) {
+		super(x, y, team, ai);
 		shieldAngle=startShieldAngle;
 		this.ai=ai;
+	}
+	
+	public void render(Graphics2D g) {
+		if (Window.fancyMode) {
+			g.rotate(shieldAngle+Math.PI/2, getPosition().x, getPosition().y);
+			Image toDraw=null;
+			if (getTeam()==0) {
+				toDraw=Sprite.tank.getBufferedImage();
+			}
+			else {
+				toDraw=Sprite.tankBlue.getBufferedImage();
+			}
+			g.drawImage(toDraw, (int)(getPosition().x-getRadius()), (int)(getPosition().y-getRadius()), (int)(getRadius()*2), (int)(getRadius()*2), null);
+			g.rotate(-shieldAngle-Math.PI/2, getPosition().x, getPosition().y);
+			subRender(g);
+		} 
+		else {
+			super.render(g);
+		}
 	}
 	
 	protected void subUpdate(ArrayList<Soldier> others, ArrayList<Bullet> bullets) {

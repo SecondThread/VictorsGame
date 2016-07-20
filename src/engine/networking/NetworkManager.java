@@ -21,23 +21,23 @@ public class NetworkManager {
 			Point position=s.getPosition();
 			int playerType=0;
 			String soldierString="";
-			int redValue=s.getColor().getRed();
-			int greenValue=s.getColor().getGreen();
-			int blueValue=s.getColor().getBlue();
+			int team=s.getTeam();
+			double xVelocity=s.getVelocity().x;
+			double yVelocity=s.getVelocity().y;
 			
 			if (s instanceof Runner) {
 				playerType=1;
-				soldierString=playerType+","+position.x+","+position.y+","+redValue+","+greenValue+","+blueValue+";";
+				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+";";
 			}
 			else if (s instanceof Tank) {
 				playerType=2;
 				double shieldAngle=((Tank)s).getShieldAngle();
-				soldierString=playerType+","+position.x+","+position.y+","+redValue+","+greenValue+","+blueValue+","+shieldAngle+";";
+				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+","+shieldAngle+";";
 			}
 			else if (s instanceof Sniper) {
 				playerType=3;
 				double gunAngle=((Sniper)s).getGunAngle();
-				soldierString=playerType+","+position.x+","+position.y+","+redValue+","+greenValue+","+blueValue+","+gunAngle+";";
+				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+","+gunAngle+";";
 			}
 			soldierPositions+=soldierString;
 		}
@@ -76,19 +76,19 @@ public class NetworkManager {
 			String type=arguements[0];
 			double x=Double.parseDouble(arguements[1]);
 			double y=Double.parseDouble(arguements[2]);
-			int r=Integer.parseInt(arguements[3]);
-			int g=Integer.parseInt(arguements[4]);
-			int b=Integer.parseInt(arguements[5]);
+			int team=Integer.parseInt(arguements[3]);
+			double xVelocity=Double.parseDouble(arguements[4]);
+			double yVelocity=Double.parseDouble(arguements[5]);
 			if (type.equals("1")) {
-				toReturn.add(new ClientSoldier(x, y, r, g, b));
+				toReturn.add(new ClientSoldier(x, y, team, xVelocity, yVelocity));
 			}
 			else if (type.equals("2")) {
 				double shieldAngle=Double.parseDouble(arguements[6]);
-				toReturn.add(new ClientTank(x, y, r, g, b, shieldAngle));
+				toReturn.add(new ClientTank(x, y, team, xVelocity, yVelocity, shieldAngle));
 			}
 			else if (type.equals("3")) {
 				double gunAngle=Double.parseDouble(arguements[6]);
-				toReturn.add(new ClientSniper(x, y, r, g, b, gunAngle));
+				toReturn.add(new ClientSniper(x, y, team, xVelocity, yVelocity, gunAngle));
 			}
 		}
 		return toReturn;
