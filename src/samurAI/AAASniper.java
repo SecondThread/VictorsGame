@@ -25,12 +25,7 @@ public class AAASniper extends SniperAI {
 		getSoldierToTarget(soldiers);
 		if (soldierToTarget!=null) {
 			targetSoldier();
-		}		
-		
-		
-		Soldier closest=getClosestSoldier(soldiers);
-		if (closest!=null) {
-			movement.update(closest, bullets, mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
+			movement.update(soldierToTarget, soldiers, bullets, mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
 		}
 		direction=movement.getDirection();
 		moveSpeed=movement.getSpeed();
@@ -39,7 +34,7 @@ public class AAASniper extends SniperAI {
 	private void getSoldierToTarget(ArrayList<Soldier> soldiers) {
 		ArrayList<Soldier> targetable=new ArrayList<Soldier>();//all soldiers not on my team
 		for (Soldier s:soldiers) {
-			if (s.getAI().getTeamID()!=teamID) {
+			if (s.getTeam()!=mySoldier.getTeam()) {
 				targetable.add(s);
 			}
 		}

@@ -13,8 +13,8 @@ public class BigKahunaRunner extends RunnerAI {
 	private int player=0;
 	private String input="";
 	
-	public BigKahunaRunner(int player) {
-		super(player);
+	public BigKahunaRunner(int player, int team) {
+		super(team);
 		this.player=player;
 	}
 

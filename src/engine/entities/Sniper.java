@@ -44,7 +44,7 @@ public class Sniper extends Soldier {
 	
 	public void render(Graphics2D g) {
 		if (Window.fancyMode) {			
-			g.rotate(gunAngle, getPosition().x, getPosition().y);
+			g.rotate(getGunAngle(), getPosition().x, getPosition().y);
 			double newRadius=getRadius()*44/40;
 			Image toDraw=null;
 			if (getTeam()==0) {
@@ -54,7 +54,7 @@ public class Sniper extends Soldier {
 				toDraw=Sprite.sniperBlue.getBufferedImage();
 			}
 			g.drawImage(toDraw, (int)(getPosition().x-newRadius), (int)(getPosition().y-newRadius), (int)(getRadius()*2*58/44), (int)(newRadius*2), null);
-			g.rotate(-gunAngle, getPosition().x, getPosition().y);
+			g.rotate(-getGunAngle(), getPosition().x, getPosition().y);
 			//subRender(g);
 		} 
 		else {
@@ -83,8 +83,8 @@ public class Sniper extends Soldier {
 	}
 	
 	private void fire(ArrayList<Bullet> bullets) {
-		double xOffset=getRadius()*1.5*Math.cos(gunAngle);
-		double yOffset=getRadius()*1.5*Math.sin(gunAngle);
+		double xOffset=getRadius()*1.5*Math.cos(getGunAngle());
+		double yOffset=getRadius()*1.5*Math.sin(getGunAngle());
 		Bullet toCreate=new Bullet(getPosition().x+xOffset, getPosition().y+yOffset, gunAngle);
 		bullets.add(toCreate);
 	}

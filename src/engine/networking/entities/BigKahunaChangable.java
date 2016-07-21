@@ -18,11 +18,10 @@ public class BigKahunaChangable extends RunnerAI {
 	private int team=0;
 	
 	public BigKahunaChangable(int player, boolean onLeft, int team) {
-		super(player);
+		super(team);
 		this.player=player;
 		this.onLeft=onLeft;
 		this.team=team;
-		System.out.println(team);
 	}
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
@@ -40,13 +39,13 @@ public class BigKahunaChangable extends RunnerAI {
 		}
 		
 		if (playerType==0) {
-			BigKahunaGame.addPlayer(new Sniper(me.getPosition().x, me.getPosition().y, team, new BigKahunaSniper(player)), me);
+			BigKahunaGame.addPlayer(new Sniper(me.getPosition().x, me.getPosition().y, team, new BigKahunaSniper(player, team)), me);
 		}
 		else if (playerType==1) {
-			BigKahunaGame.addPlayer(new Tank(me.getPosition().x, me.getPosition().y, team, new BigKahunaTank(player), onLeft?0:Math.PI), me);
+			BigKahunaGame.addPlayer(new Tank(me.getPosition().x, me.getPosition().y, team, new BigKahunaTank(player, team), onLeft?0:Math.PI), me);
 		}
 		else if (playerType==2) {
-			BigKahunaGame.addPlayer(new Runner(me.getPosition().x, me.getPosition().y, team, new BigKahunaRunner(player)), me);
+			BigKahunaGame.addPlayer(new Runner(me.getPosition().x, me.getPosition().y, team, new BigKahunaRunner(player, team)), me);
 		}
 	}
 }

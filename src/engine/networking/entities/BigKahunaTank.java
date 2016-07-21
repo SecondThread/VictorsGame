@@ -15,8 +15,8 @@ public class BigKahunaTank extends TankAI {
 	private Soldier me=null;
 	private double shieldAngle;
 
-	public BigKahunaTank(int player) {
-		super(player);
+	public BigKahunaTank(int player, int team) {
+		super(team);
 		this.player=player;
 	}
 
