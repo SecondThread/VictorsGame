@@ -7,6 +7,7 @@ import engine.entities.Bullet;
 import engine.entities.Point;
 import engine.entities.Soldier;
 import samurAI.movement.SmartMovement;
+import samurAI.movement.TeammateDodger;
 
 public class AAASniper extends SniperAI {
 	private Soldier soldierToTarget=null;
@@ -14,6 +15,7 @@ public class AAASniper extends SniperAI {
 	private double gunAngle=0;
 	
 	private SmartMovement movement=new SmartMovement();
+	private boolean fireIfPossible=true;
 	
 	public AAASniper(int team) {
 		super(team);
@@ -27,6 +29,7 @@ public class AAASniper extends SniperAI {
 			targetSoldier();
 			movement.update(soldierToTarget, soldiers, bullets, mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
 		}
+		fireIfPossible=movement.goodTimeToShoot(soldiers, mySoldier, gunAngle);
 		direction=movement.getDirection();
 		moveSpeed=movement.getSpeed();
 	}
@@ -75,7 +78,7 @@ public class AAASniper extends SniperAI {
 	}
 
 	public boolean fireIfPossible() {
-		return movement.goodTimeToShoot();
+		return fireIfPossible;
 	}
 	
 	public Soldier getClosestSoldier(ArrayList<Soldier> soldiers) {

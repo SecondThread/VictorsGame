@@ -66,7 +66,7 @@ public class SmartMovement {
 		return speed;
 	}
 
-	public boolean goodTimeToShoot() {
-		return sniperMovement.goodTimeToShoot();
+	public boolean goodTimeToShoot(ArrayList<Soldier> soldiers, Soldier mySoldier, double angle) {
+		return sniperMovement.goodTimeToShoot()&&teammateDodger.getSafeToShoot(soldiers, mySoldier, angle);
 	}
 }

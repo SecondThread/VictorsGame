@@ -2,12 +2,14 @@ package samurAI.movement;
 
 import java.util.ArrayList;
 
+import engine.entities.Bullet;
 import engine.entities.Point;
 import engine.entities.Soldier;
 
 public class TeammateDodger {
 	private boolean needToMove=false;
 	private double xVelocity=0, yVelocity=0;
+	private BulletDodger dodger=new BulletDodger();
 	
 	public TeammateDodger() {
 	}
@@ -54,4 +56,16 @@ public class TeammateDodger {
 		Point current=s.getPosition();
 		return new Point(current.x+s.getVelocity().x*30, current.y+s.getVelocity().y*30);
 	}
+
+	public boolean getSafeToShoot(ArrayList<Soldier> soldiers, Soldier mySoldier, double angle) {
+		soldiers=getSoldiersOnTeam(soldiers, mySoldier);
+		Bullet pretend=new Bullet(mySoldier.getPosition().x, mySoldier.getPosition().y, angle);
+		for (Soldier s:soldiers) {
+			if (dodger.needToDodge(s.getPosition(), pretend, mySoldier.getRadius(), 2)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
