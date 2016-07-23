@@ -19,25 +19,32 @@ public class NetworkManager {
 		String soldierPositions="";
 		for (Soldier s:soldiers) {
 			Point position=s.getPosition();
+			String x=(int)(position.x)+"", y=(int)(position.y)+"";
 			int playerType=0;
 			String soldierString="";
 			int team=s.getTeam();
-			double xVelocity=s.getVelocity().x;
-			double yVelocity=s.getVelocity().y;
+			String xVelocity=s.getVelocity().x+"";
+			String yVelocity=s.getVelocity().y+"";
+			if (xVelocity.length()>4) {
+				xVelocity=xVelocity.substring(0, 4);
+			}
+			if (yVelocity.length()>4) {
+				yVelocity=yVelocity.substring(0, 4);
+			}
 			
 			if (s instanceof Runner) {
 				playerType=1;
-				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+";";
+				soldierString=playerType+","+x+","+y+","+team+","+xVelocity+","+yVelocity+";";
 			}
 			else if (s instanceof Tank) {
 				playerType=2;
 				double shieldAngle=((Tank)s).getShieldAngle();
-				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+","+shieldAngle+";";
+				soldierString=playerType+","+x+","+y+","+team+","+xVelocity+","+yVelocity+","+shieldAngle+";";
 			}
 			else if (s instanceof Sniper) {
 				playerType=3;
 				double gunAngle=((Sniper)s).getGunAngle();
-				soldierString=playerType+","+position.x+","+position.y+","+team+","+xVelocity+","+yVelocity+","+gunAngle+";";
+				soldierString=playerType+","+x+","+y+","+team+","+xVelocity+","+yVelocity+","+gunAngle+";";
 			}
 			soldierPositions+=soldierString;
 		}
@@ -56,8 +63,8 @@ public class NetworkManager {
 			totalBulletString=totalBulletString.substring(0, totalBulletString.length()-1);//take off the last ;
 		
 		soldierPositions+=totalBulletString;
-		//System.out.println(soldierPositions);
 		Client.sendCommand("set soldierPositions "+soldierPositions);
+		//System.out.println("\tcharacters sent: "+soldierPositions.length());
 	}
 
 	public static String getData() {

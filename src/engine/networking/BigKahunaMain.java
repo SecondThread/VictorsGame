@@ -8,6 +8,7 @@ public class BigKahunaMain {
 
 	private static BigKahunaGame game;
 	private static int updatesPerSecond=60;
+	private static int newtorkUpdatesPerSecond=15;
 
 	public static void main(String[] args) {
 		Window.init();
@@ -29,7 +30,7 @@ public class BigKahunaMain {
 		long startTime=System.currentTimeMillis();
 		long startNetworkTime=System.currentTimeMillis();
 		final long timeBetweenUpdates=1000/updatesPerSecond;
-		final long timeBetweenNetworkUpdates=1000/updatesPerSecond;
+		final long timeBetweenNetworkUpdates=1000/newtorkUpdatesPerSecond;
 		int updates=0, frames=0;
 		long lastUpdateFrames=System.currentTimeMillis();
 

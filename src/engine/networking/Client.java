@@ -12,7 +12,7 @@ public class Client {
 	
 	public static void clientInit() {
 		try {
-			kkSocket=new Socket("localhost", 7555);
+			kkSocket=new Socket("192.168.1.102", 5560);
 			out=new PrintWriter(kkSocket.getOutputStream(), true);
 			in=new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
 			playerID=Integer.parseInt(getIDFromServer());
@@ -20,7 +20,7 @@ public class Client {
 			System.err.println("Don't know about host: localhost.");
 			System.exit(1);
 		} catch (IOException e) {
-			System.err.println("Couldn't get I/O for the connection to: localhost.");
+			System.err.println("Couldn't get I/O for the connection.");
 			System.exit(1);
 		}
 	}
