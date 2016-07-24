@@ -97,4 +97,8 @@ public class AAASniper extends SniperAI {
 		return closest;
 	}
 	
+	public void setMySoldier(Soldier mySoldier) {
+		this.mySoldier=mySoldier;
+	}
+	
 }

@@ -8,7 +8,7 @@ import engine.networking.input.SoldierChooser;
 
 public class ClientMain {
 	private static ClientGame game;
-	private static int updatesPerSecond=24;
+	private static int updatesPerSecond=15;
 	private static int soldierType;
 	
 	public static void main(String[] args) {

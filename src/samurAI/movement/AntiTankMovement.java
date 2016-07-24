@@ -37,8 +37,22 @@ public class AntiTankMovement {
 		directionModifier*=-1;
 		Point flipped=getTargetPoint(angle, radius, toAttack, pointToAttack);
 		directionModifier*=-1;
-		if (isValidTarget(flipped)&&!isValidTarget(toTarget)) {
+		boolean canFlip=isValidTarget(flipped);
+		boolean needToFlip=canFlip&&!isValidTarget(toTarget);
+		if (needToFlip) {
 			directionModifier*=-1;
+			return;
+		}
+		if (!canFlip) {
+			return;
+		}
+		double direction=toAttack.getVelocity().direction();
+		double worstDirection=toAttack.getPosition().directionTo(pointToAttack);
+		Point unpolarDirection=new Point(Math.cos(direction), Math.sin(direction));
+		Point unpolarWorstDirection=new Point(Math.cos(worstDirection), Math.sin(worstDirection));
+		if (unpolarDirection.distance(unpolarWorstDirection)<0.2) {
+			//System.out.println("Flipping because really bad...");
+			//directionModifier*=-1;
 		}
 	}
 	

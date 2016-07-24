@@ -5,22 +5,44 @@ import java.util.ArrayList;
 import engine.ai.SniperAI;
 import engine.entities.Bullet;
 import engine.entities.Soldier;
+import samurAI.AAASniper;
 
 public class FormationShooter extends SniperAI {
-	private Formation formation;
+	private SniperDuoFormation formation;
 	private int formationIndex;
 	private boolean formationBroken=false;
-	private SniperAI backup;
+	private AAASniper backup;
+	private FormationMovement movement;
+	private Soldier mySoldier=null;
 	
-	public FormationShooter(int teamID, Formation formation, int formationIndex, SniperAI backup) {
+	public FormationShooter(int teamID, SniperDuoFormation formation, int formationIndex, AAASniper backup) {
 		super(teamID);
 		this.formation=formation;
 		this.formationIndex=formationIndex;
 		this.backup=backup;
+		movement=new FormationMovement(formation, formationIndex);
 	}
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
+		formationBroken=formation.getFormationBroken();
+		updateMySoldier(soldiers);
+		movement.update(mySoldier);
+		backup.setMySoldier(mySoldier);
 		backup.update(soldiers, bullets);
+		updateDirection();
+		formation.setDirectionSuggustion(backup.direction, formationIndex, mySoldier.getPosition());
+		if (formationIndex==1) {
+			formation.update(soldiers, bullets);
+		}
+	}
+	
+	private void updateDirection() {
+		if (formationBroken) {
+			direction=backup.direction;
+		}
+		else {
+			direction=movement.getDirectionToMove();
+		}
 	}
 	
 	public double getGunAngle() {
@@ -28,11 +50,18 @@ public class FormationShooter extends SniperAI {
 	}
 	
 	public double getMoveSpeed() {
-		return backup.getMoveSpeed();
+		if (formationBroken) {
+			System.out.println("broken");
+			return 1;//return backup.getMoveSpeed();
+		}
+		return movement.getMoveSpeed();
 	}
 	
 	public boolean fireIfPossible() {
-		return backup.fireIfPossible();
+		if (formationBroken) {
+			return backup.fireIfPossible();			
+		}
+		return backup.fireIfPossible()&&formation.isTimeToShoot(formationIndex);
 	}
 	
 	public void breakFormation() {
@@ -41,6 +70,14 @@ public class FormationShooter extends SniperAI {
 	
 	public void establishFormation() {
 		formationBroken=false;
+	}
+	
+	private void updateMySoldier(ArrayList<Soldier> soldiers) {
+		for (Soldier s:soldiers) {
+			if (s.getAI()==this) {
+				mySoldier=s;
+			}
+		}
 	}
 	
 }

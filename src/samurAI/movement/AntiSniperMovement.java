@@ -13,6 +13,7 @@ public class AntiSniperMovement {
 	private boolean goodTimeToShoot=false;
 	
 	private int idealDistance=250;
+	private int enemyWaitCounter=0;
 	
 	public void update(Soldier toAttack, ArrayList<Bullet> bullets, Soldier mySoldier, double radius, Point velocity) {
 		Point myFuturePosition=getFuturePosition(mySoldier, 30);
@@ -21,11 +22,18 @@ public class AntiSniperMovement {
 			int framesLeft=((Sniper) toAttack).getFramesUntilCanShoot();
 			if (framesLeft<40) {
 				idealDistance=(int) (700+toAttack.getVelocity().magnitude()*30);
+				if (framesLeft<=1) {
+					enemyWaitCounter++;
+				}
+				else {
+					enemyWaitCounter=0;
+				}
 			}
 			else {
 				idealDistance=400;
+				enemyWaitCounter=0;
 			}
-			goodTimeToShoot=framesLeft>45&&framesLeft<60;
+			goodTimeToShoot=framesLeft>45&&framesLeft<60||myFuturePosition.distance(enemyFuturePosition)<400||enemyWaitCounter>200;
 		}
 		else {
 			goodTimeToShoot=myFuturePosition.distance(enemyFuturePosition)<350;
