@@ -17,6 +17,8 @@ public class AAASniper extends SniperAI {
 	private SmartMovement movement=new SmartMovement();
 	private boolean fireIfPossible=true;
 	
+	private double targetOffsetRadiusMultiplier=0;
+	
 	public AAASniper(int team) {
 		super(team);
 		teamID=team;
@@ -58,6 +60,10 @@ public class AAASniper extends SniperAI {
 	private void targetSoldier() {
 		Point myLocation=mySoldier.getPosition();
 		Point otherLocation=soldierToTarget.getPosition();
+		double angleToOTher=myLocation.directionTo(otherLocation);
+		otherLocation.x+=Math.cos(angleToOTher+Math.PI/2)*targetOffsetRadiusMultiplier*mySoldier.getRadius();
+		otherLocation.y+=Math.sin(angleToOTher+Math.PI/2)*targetOffsetRadiusMultiplier*mySoldier.getRadius();
+		
 		double distance=myLocation.distance(otherLocation);
 		double bulletTravelTime=distance/Bullet.velocity; //speed=distance/time, so time=distance/speed
 		otherLocation.x+=soldierToTarget.getVelocity().x*bulletTravelTime*.75;
@@ -99,6 +105,10 @@ public class AAASniper extends SniperAI {
 	
 	public void setMySoldier(Soldier mySoldier) {
 		this.mySoldier=mySoldier;
+	}
+	
+	public void setTargetOffsetRadiusMultiplier(double radiusMultiplier) {
+		this.targetOffsetRadiusMultiplier=radiusMultiplier;
 	}
 	
 }

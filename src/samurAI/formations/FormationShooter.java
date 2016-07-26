@@ -20,6 +20,12 @@ public class FormationShooter extends SniperAI {
 		this.formation=formation;
 		this.formationIndex=formationIndex;
 		this.backup=backup;
+		if (formationIndex==0) {			
+			backup.setTargetOffsetRadiusMultiplier(1.2);
+		}
+		else {
+			backup.setTargetOffsetRadiusMultiplier(-1.2);
+		}
 		movement=new FormationMovement(formation, formationIndex);
 	}
 	
