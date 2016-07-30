@@ -19,9 +19,16 @@ public class AAASniper extends SniperAI {
 	
 	private double targetOffsetRadiusMultiplier=0;
 	
+	private boolean shootFromAnyDistance=false;
+	
 	public AAASniper(int team) {
 		super(team);
 		teamID=team;
+	}
+	
+	public AAASniper(int team, boolean shootFromAnyDistance) {
+		this(team);
+		this.shootFromAnyDistance=shootFromAnyDistance;
 	}
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
@@ -31,7 +38,7 @@ public class AAASniper extends SniperAI {
 			targetSoldier();
 			movement.update(soldierToTarget, soldiers, bullets, mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
 		}
-		fireIfPossible=movement.goodTimeToShoot(soldiers, mySoldier, gunAngle);
+		fireIfPossible=movement.goodTimeToShoot(soldiers, mySoldier, gunAngle, shootFromAnyDistance);
 		direction=movement.getDirection();
 		moveSpeed=movement.getSpeed();
 	}
@@ -110,5 +117,10 @@ public class AAASniper extends SniperAI {
 	public void setTargetOffsetRadiusMultiplier(double radiusMultiplier) {
 		this.targetOffsetRadiusMultiplier=radiusMultiplier;
 	}
+	
+	public boolean needToMove() {
+		return movement.needToMove();
+	}
+	
 	
 }

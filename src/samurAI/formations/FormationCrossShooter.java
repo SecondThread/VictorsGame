@@ -7,40 +7,24 @@ import engine.entities.Bullet;
 import engine.entities.Soldier;
 import samurAI.AAASniper;
 
-public class FormationShooter extends SniperAI {
-	private SniperDuoFormation formation;
+public class FormationCrossShooter extends SniperAI {
+	private SniperCrossFormation formation;
 	private int formationIndex;
 	private boolean formationBroken=false;
 	private AAASniper backup;
 	private FormationMovement movement;
 	private Soldier mySoldier=null;
-	private int formationBrokenCounter=0;
 	
-	public FormationShooter(int teamID, SniperDuoFormation formation, int formationIndex, AAASniper backup) {
+	public FormationCrossShooter(int teamID, SniperCrossFormation formation, int formationIndex, AAASniper backup) {
 		super(teamID);
 		this.formation=formation;
 		this.formationIndex=formationIndex;
 		this.backup=backup;
-		if (formationIndex==0) {			
-			backup.setTargetOffsetRadiusMultiplier(0.9);
-		}
-		else {
-			backup.setTargetOffsetRadiusMultiplier(-0.9);
-		}
 		movement=new FormationMovement(formation, formationIndex);
 	}
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 		formationBroken=formation.getFormationBroken();
-		if (formationBroken) {
-			formationBrokenCounter++;
-			if (formationBrokenCounter>20) {
-				backup.setTargetOffsetRadiusMultiplier(0);
-			}
-		}
-		else {
-			formationBrokenCounter=0;
-		}
 		updateMySoldier(soldiers);
 		movement.update(mySoldier);
 		backup.setMySoldier(mySoldier);
@@ -96,4 +80,7 @@ public class FormationShooter extends SniperAI {
 		}
 	}
 	
+	public boolean needToMove() {
+		return backup.needToMove();
+	}
 }

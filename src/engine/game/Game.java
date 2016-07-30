@@ -110,6 +110,7 @@ public class Game {
 		for (Bullet b:bullets) {
 			b.render(g);
 		}
+		g.dispose();
 	}
 
 }

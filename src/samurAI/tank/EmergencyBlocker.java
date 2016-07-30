@@ -6,6 +6,7 @@ import engine.entities.Bullet;
 import engine.entities.Point;
 import engine.entities.Tank;
 import engine.game.Window;
+import samurAI.movement.TeammateDodger;
 
 public class EmergencyBlocker {
 	private double direction;
@@ -14,6 +15,7 @@ public class EmergencyBlocker {
 	private double moveSpeed;
 
 	private BulletBlocker bulletBlocker;
+	private TeammateDodger teammateDodger;
 	
 	public EmergencyBlocker() {
 		bulletBlocker=new BulletBlocker();

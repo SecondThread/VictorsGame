@@ -1,8 +1,5 @@
 package samurAI.movement;
 
-import java.util.ArrayList;
-
-import engine.entities.Bullet;
 import engine.entities.Point;
 import engine.entities.Soldier;
 import engine.game.Window;
@@ -11,8 +8,23 @@ public class AntiTankMovement {
 	private double direction=0f;
 	private double speed=1;
 	private double directionModifier=1;
+	private int flipCounter=0;
 	
-	public void update(Soldier toAttack, ArrayList<Bullet> bullets, Soldier mySoldier, double radius, Point velocity) {
+	private double extrapolationValue=30;
+	
+	public AntiTankMovement() {
+		this(30);
+	}
+	
+	public AntiTankMovement(double extrapolationValue) {
+		this.extrapolationValue=extrapolationValue;
+	}
+	
+	public void update(Soldier toAttack, Soldier mySoldier, double radius, Point velocity) {
+		flipCounter++;
+		if (flipCounter>1200) {
+			directionModifier*=-1;
+		}
 		Point position=mySoldier.getPosition();
 		Point pointToAttack=getPointToAttack(toAttack, mySoldier);
 		double angle=pointToAttack.directionTo(position);
@@ -23,13 +35,13 @@ public class AntiTankMovement {
 	
 	private Point getPointToAttack(Soldier toAttack, Soldier mySoldier) {
 		Point position=toAttack.getPosition();
-		position.x+=(toAttack.getVelocity().x-mySoldier.getVelocity().x)*30;
-		position.y+=(toAttack.getVelocity().y-mySoldier.getVelocity().y)*30;
+		position.x+=(toAttack.getVelocity().x-mySoldier.getVelocity().x)*extrapolationValue;
+		position.y+=(toAttack.getVelocity().y-mySoldier.getVelocity().y)*extrapolationValue;
 		return position;
 	}
 	
 	private double getAttackRadius(double radius, Soldier toAttack) {
-		return 100+radius+toAttack.getVelocity().magnitude()*60;
+		return 100+radius+toAttack.getVelocity().magnitude()*3*extrapolationValue-30;
 	}
 	
 	public void tryToFlipAngle(double angle, double radius, Soldier toAttack, Point pointToAttack) {

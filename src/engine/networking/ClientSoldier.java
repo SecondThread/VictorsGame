@@ -73,4 +73,8 @@ public class ClientSoldier {
 	public double getRadius() {
 		return radius;
 	}
+	
+	public int getTeam() {
+		return team;
+	}
 }

@@ -35,6 +35,10 @@ public class TeammateDodger {
 		return new Point(xVelocity, yVelocity);
 	}
 	
+	public double getDirectionToMove() {
+		return Math.atan2(yVelocity, xVelocity);
+	}
+	
 	public boolean getNeedToMove() {
 		if (needToMove) {
 			System.out.println("Need to move...");
@@ -54,7 +58,7 @@ public class TeammateDodger {
 	
 	private Point getFuturePosition(Soldier s) {
 		Point current=s.getPosition();
-		return new Point(current.x+s.getVelocity().x*30, current.y+s.getVelocity().y*30);
+		return new Point(current.x+s.getVelocity().x*10, current.y+s.getVelocity().y*10);
 	}
 
 	public boolean getSafeToShoot(ArrayList<Soldier> soldiers, Soldier mySoldier, double angle) {

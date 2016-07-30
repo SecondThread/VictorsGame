@@ -28,7 +28,7 @@ public class SmartMovement {
 
 	public void update(Soldier toAttack, ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets, Soldier mySoldier, double radius, Point velocity) {
 		emergencyMovement.update(bullets, mySoldier.getPosition(), radius, velocity);
-		tankMovement.update(toAttack, bullets, mySoldier, radius, velocity);
+		tankMovement.update(toAttack, mySoldier, radius, velocity);
 		sniperMovement.update(toAttack, bullets, mySoldier, radius, velocity);
 		runnerMovement.update(toAttack, bullets, mySoldier, radius, velocity);
 		teammateDodger.update(soldiers, mySoldier);
@@ -66,7 +66,14 @@ public class SmartMovement {
 		return speed;
 	}
 
-	public boolean goodTimeToShoot(ArrayList<Soldier> soldiers, Soldier mySoldier, double angle) {
+	public boolean goodTimeToShoot(ArrayList<Soldier> soldiers, Soldier mySoldier, double angle, boolean shootFromAnyDistance) {
+		if (shootFromAnyDistance) {
+			return teammateDodger.getSafeToShoot(soldiers, mySoldier, angle);
+		}
 		return sniperMovement.goodTimeToShoot()&&teammateDodger.getSafeToShoot(soldiers, mySoldier, angle);
+	}
+	
+	public boolean needToMove() {
+		return emergencyMovement.needToMove()||teammateDodger.getNeedToMove();
 	}
 }

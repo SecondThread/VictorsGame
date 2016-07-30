@@ -9,6 +9,7 @@ import engine.networking.input.SoldierChooser;
 public class ClientMain {
 	private static ClientGame game;
 	private static int updatesPerSecond=15;
+	private static int particleUpdatesPerSecond=50;
 	private static int soldierType;
 	
 	public static void main(String[] args) {
@@ -22,15 +23,21 @@ public class ClientMain {
 
 	private static void runGameLoop() {
 		long startTime=System.currentTimeMillis();
+		long startParticleTime=System.currentTimeMillis();
 		final long timeBetweenUpdates=1000/updatesPerSecond;
+		final long timeBetweenParticleUpdates=1000/particleUpdatesPerSecond;
 		int updates=0, frames=0;
 		long lastUpdateFrames=System.currentTimeMillis();
 		
 		while (true) {
-			while (startTime+timeBetweenUpdates<System.currentTimeMillis()) {
+			if (startTime+timeBetweenUpdates<System.currentTimeMillis()) {
 				update();
 				updates++;
 				startTime+=timeBetweenUpdates;
+			}
+			if (startParticleTime+timeBetweenParticleUpdates<System.currentTimeMillis()) {
+				particleUpdate();
+				startParticleTime+=timeBetweenParticleUpdates;
 			}
 			render();
 			frames++;
@@ -43,12 +50,18 @@ public class ClientMain {
 		}
 	}
 	
+	private static void particleUpdate() {
+		game.particleUpdate();
+	}
+	
 	private static void update() {
 		game.update();
 	}
 	
 	private static void render() {
 		BufferedImage toDrawOn=new BufferedImage(Window.WIDTH, Window.HEIGHT, BufferedImage.TYPE_INT_RGB);
+		game.renderBackground(toDrawOn);
+		game.particleRender(toDrawOn);
 		game.render(toDrawOn);
 		Window.paint(toDrawOn);
 	}

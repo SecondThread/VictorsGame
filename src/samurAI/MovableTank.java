@@ -21,11 +21,10 @@ public class MovableTank extends TankAI {
 	
 	public void update(ArrayList<Soldier> soldiers, ArrayList<Bullet> bullets) {
 		updateMySoldier(soldiers);
-		movement.update(getNearestSniper(soldiers, false), bullets, (Tank)mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
+		movement.update(getNearestSniper(soldiers, false), soldiers, bullets, (Tank)mySoldier, mySoldier.getRadius(), mySoldier.getVelocity());
 		moveSpeed=movement.getSpeed();
 		direction=movement.getDirection();
 		directionToTurn=movement.getMoveShieldDirection();
-
 	}
 	
 	private void updateMySoldier(ArrayList<Soldier> soldiers) {
