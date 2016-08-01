@@ -16,9 +16,9 @@ public class Window {
 	private static JPanel outerPanel;
 	public static final int WIDTH=1600, HEIGHT=900;
 	
-	public static final int scaleFactor=2;
+	public static int scaleFactor=2;
 	
-	public static final boolean fancyMode=true;
+	public static boolean fancyMode=true;
 	
 	public static void init() {
 		outerPanel=new JPanel();

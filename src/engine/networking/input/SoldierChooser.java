@@ -12,15 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import engine.game.Main;
+import engine.game.Window;
+import engine.networking.Client;
+import engine.networking.ClientMain;
 
 public class SoldierChooser {
 	private static JFrame frame;
 	private static JPanel mainPanel;
 	private static JPanel playerTypePanel, ipPanel, funModePanel;
 	private static JButton chooseSniper, chooseTank, chooseRunner;
-	private static JLabel ipLabel, funModeLabel, superBoringModeLabel;
+	private static JLabel ipLabel, funModeLabel, superBoringModeLabel, smallWindowLabel;
 	private static JTextField ipField;
-	private static JCheckBox funModeCheckBox, superBoringModeCheckbox;
+	private static JCheckBox funModeCheckbox, superBoringModeCheckbox, smallWindowCheckbox;
 	private static volatile int choice=-1;
 	public static int chooseType() {
 		createJFrame();
@@ -40,7 +43,7 @@ public class SoldierChooser {
 		mainPanel.add(playerTypePanel);
 		mainPanel.add(ipPanel);
 		mainPanel.add(funModePanel);
-		mainPanel.setPreferredSize(new Dimension(400,130));
+		mainPanel.setPreferredSize(new Dimension(550,130));
 		
 		frame=new JFrame("Choose your Soldier");
 		frame.add(mainPanel);
@@ -83,7 +86,7 @@ public class SoldierChooser {
 		ipLabel=new JLabel("Server IP: ");
 		ipPanel.add(ipLabel);
 		
-		ipField=new JTextField();
+		ipField=new JTextField(Client.serverIP);
 		ipPanel.add(ipField);
 	}
 	
@@ -93,17 +96,28 @@ public class SoldierChooser {
 		funModeLabel=new JLabel("SUPER HAPPY FUNTIME!!");
 		funModePanel.add(funModeLabel);
 		
-		funModeCheckBox=new JCheckBox();
-		funModePanel.add(funModeCheckBox);
+		funModeCheckbox=new JCheckBox("", true);
+		funModePanel.add(funModeCheckbox);
 		
 		superBoringModeLabel=new JLabel("         super boring mode:");
 		funModePanel.add(superBoringModeLabel);
 		
-		superBoringModeCheckbox=new JCheckBox();
+		superBoringModeCheckbox=new JCheckBox("", false);
 		funModePanel.add(superBoringModeCheckbox);
+		
+		smallWindowLabel=new JLabel("         Economy-sized Window:");
+		funModePanel.add(smallWindowLabel);
+		
+		smallWindowCheckbox=new JCheckBox("", false);
+		funModePanel.add(smallWindowCheckbox);
 	}
 	
 	public static void setChoice(int choice) {
 		SoldierChooser.choice=choice;
+		Client.serverIP=ipField.getText();
+		Window.fancyMode=!superBoringModeCheckbox.isSelected();
+		Window.scaleFactor=smallWindowCheckbox.isSelected()?2:1;
+		ClientMain.drawParticles=funModeCheckbox.isSelected();
 	}
+
 }

@@ -11,6 +11,7 @@ public class ClientMain {
 	private static int updatesPerSecond=15;
 	private static int particleUpdatesPerSecond=50;
 	private static int soldierType;
+	public static boolean drawParticles=true;
 	
 	public static void main(String[] args) {
 		soldierType=SoldierChooser.chooseType();
@@ -61,7 +62,9 @@ public class ClientMain {
 	private static void render() {
 		BufferedImage toDrawOn=new BufferedImage(Window.WIDTH, Window.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		game.renderBackground(toDrawOn);
-		game.particleRender(toDrawOn);
+		if (drawParticles) {
+			game.particleRender(toDrawOn);
+		}
 		game.render(toDrawOn);
 		Window.paint(toDrawOn);
 	}

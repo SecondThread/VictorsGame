@@ -12,7 +12,7 @@ public class MultiServer {
 	public static void main(String[] args) throws IOException {
 		ServerSocket serverSocket=null;
 		boolean listening=true;
-		short port=7555;
+		short port=5560;
 
 		try {
 			serverSocket=new ServerSocket(port);
