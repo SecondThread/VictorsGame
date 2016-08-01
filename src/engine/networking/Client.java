@@ -9,10 +9,11 @@ public class Client {
 	private static PrintWriter out=null;
 	private static BufferedReader in=null;
 	private static int playerID;
+	public static String serverIP="192.168.1.102";
 	
 	public static void clientInit() {
 		try {
-			kkSocket=new Socket("192.168.1.102", 5560);
+			kkSocket=new Socket(serverIP, 5560);
 			out=new PrintWriter(kkSocket.getOutputStream(), true);
 			in=new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
 			playerID=Integer.parseInt(getIDFromServer());
