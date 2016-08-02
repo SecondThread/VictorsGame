@@ -40,9 +40,9 @@ public class SoldierChooser {
 		setUpFunModePanel();
 
 		mainPanel=new JPanel();
-		mainPanel.add(playerTypePanel);
 		mainPanel.add(ipPanel);
 		mainPanel.add(funModePanel);
+		mainPanel.add(playerTypePanel);
 		mainPanel.setPreferredSize(new Dimension(550,130));
 		
 		frame=new JFrame("Choose your Soldier");

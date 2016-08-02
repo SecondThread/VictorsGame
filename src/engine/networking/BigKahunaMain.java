@@ -7,7 +7,7 @@ import engine.game.Window;
 public class BigKahunaMain {
 
 	private static BigKahunaGame game;
-	private static int updatesPerSecond=60;
+	private static int updatesPerSecond=30;
 	private static int newtorkUpdatesPerSecond=15;
 
 	public static void main(String[] args) {

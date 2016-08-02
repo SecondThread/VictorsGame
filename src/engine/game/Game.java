@@ -13,7 +13,7 @@ import engine.entities.Bullet;
 import engine.entities.Soldier;
 import engine.networking.BigKahunaGame;
 import engine.networking.entities.BigKahunaChangable;
-import samurAI.SamurAI;
+import samurAI.HumanTeam;
 import samurAI.SamurAISniper;
 
 public class Game {
@@ -22,7 +22,7 @@ public class Game {
 	protected ArrayList<Soldier> soldiersAlive=new ArrayList<Soldier>();
 	protected ArrayList<Bullet> bullets=new ArrayList<Bullet>();
 	
-	PlayerAI left=new SamurAI();
+	PlayerAI left=new HumanTeam();
 	PlayerAI right=new SamurAISniper();
 	
 	public static Game getTwoPlayerGame() {
