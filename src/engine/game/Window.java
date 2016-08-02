@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,12 +25,15 @@ public class Window {
 		outerPanel=new JPanel();
 		outerPanel.setPreferredSize(new Dimension(WIDTH/scaleFactor, HEIGHT/scaleFactor));
 		
+		
 		frame=new JFrame("test");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(outerPanel);
 		frame.setResizable(false);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+		ImageIcon icon=new ImageIcon(Sprite.logo.getBufferedImage());
+		frame.setIconImage(icon.getImage());
 		frame.setVisible(true);
 	}
 	

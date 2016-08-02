@@ -10,11 +10,13 @@ public class FancyBackground implements Background{
 	private Sprite spaceBackground;
 	
 	public FancyBackground() {
-		spaceBackground=new Sprite("spaceBackground.jpg");
+		spaceBackground=Sprite.fancyBackground;
 	}
 	
 	public void render(Graphics2D g) {
-		g.drawImage(spaceBackground.getBufferedImage(), 0, 0, Window.WIDTH, Window.HEIGHT, null);
+		if (spaceBackground!=null){			
+			g.drawImage(spaceBackground.getBufferedImage(), 0, 0, Window.WIDTH, Window.HEIGHT, null);
+		}
 	}
 
 }
