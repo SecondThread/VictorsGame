@@ -9,7 +9,7 @@ public class Client {
 	private static PrintWriter out=null;
 	private static BufferedReader in=null;
 	private static int playerID;
-	public static String serverIP="localhost";//"192.168.1.102";
+	public static String serverIP="192.168.1.102";
 	
 	public static void clientInit() {
 		try {
